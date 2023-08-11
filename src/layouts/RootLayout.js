@@ -1,12 +1,12 @@
 import Footer from "@/components/Footer";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/Navbar";
 import React from "react";
 
-const RootLayout = () => {
+const RootLayout = ({children}) => {
   return (
     <div>
       <Navbar />
-      {children}
+      <main>{children}</main>
       <Footer />
     </div>
   );

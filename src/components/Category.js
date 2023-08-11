@@ -4,43 +4,43 @@ import Image from "next/image";
 const categories = [
   {
     name: "CPU",
-    href: "/cpu",
+    href: "/category/cpu",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/home-page-01-category-01.jpg",
   },
   {
     name: "Motherboard",
-    href: "/motherboard",
+    href: "/category/motherboard",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/home-page-01-category-02.jpg",
   },
   {
     name: "RAM",
-    href: "/ram",
+    href: "/category/ram",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/home-page-01-category-04.jpg",
   },
   {
     name: "Power Supply Unit",
-    href: "/psu",
+    href: "/category/psu",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/home-page-01-category-05.jpg",
   },
   {
     name: "Storage Device",
-    href: "/storage",
+    href: "/category/storage",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/home-page-01-category-03.jpg",
   },
   {
     name: "Monitor",
-    href: "/monitor",
+    href: "/category/monitor",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/home-page-01-category-05.jpg",
   },
   {
     name: "Others",
-    href: "/others",
+    href: "/category/others",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/home-page-01-category-03.jpg",
   },
@@ -73,7 +73,9 @@ export default function Category() {
                     <span aria-hidden="true" className="absolute inset-0">
                       <Image
                         src={category.imageSrc}
-                        alt=""
+                        alt="category"
+                        width={ 100 }
+                        height={100}
                         className="w-full h-full object-center object-cover"
                       />
                     </span>

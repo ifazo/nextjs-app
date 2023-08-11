@@ -1,20 +1,21 @@
 import Category from "@/components/Category";
-import Featured from "@/components/Featured";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
+import Products from "@/components/Products";
+import RootLayout from "@/layouts/RootLayout";
 
 
 export default function Home() {
   return (
     <main>
-      <Navbar />
-      <Featured />
+      <Products />
       <Category />
-      <Footer />
     </main>
   )
 }
 
-// Home.getLayout = function getLayout(page) {
-//   return <RootLayout>{page}</RootLayout>
-// }
+Home.getLayout = function getLayout(page) {
+  return (
+    <RootLayout>
+      {page}
+    </RootLayout>
+  );
+};

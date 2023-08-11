@@ -52,7 +52,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Featured() {
+export default function Products() {
   return (
     <div className="bg-white">
       <div className="max-w-7xl mx-auto overflow-hidden sm:px-6 lg:px-8">

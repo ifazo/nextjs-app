@@ -6,39 +6,39 @@ import logo from "../../public/logo.png"
 
 const products = [
   {
-    name: "CPU/Processor",
+    name: "CPU",
     description: "Get a better understanding of your traffic",
-    href: "#",
+    href: "/cpu",
   },
   {
     name: "Motherboard",
     description: "Speak directly to your customers",
-    href: "#",
+    href: "/motherboard",
   },
   {
     name: "RAM",
     description: "Your customers’ data will be safe and secure",
-    href: "#",
+    href: "/ram",
   },
   {
     name: "Power Supply Unit",
     description: "Connect with third-party tools",
-    href: "#",
+    href: "/psu",
   },
   {
     name: "Storage Device",
     description: "Build strategic funnels that will convert",
-    href: "#",
+    href: "/storage",
   },
   {
     name: "Monitor",
     description: "Build strategic funnels that will convert",
-    href: "#",
+    href: "/monitor",
   },
   {
     name: "Others",
     description: "Build strategic funnels that will convert",
-    href: "#",
+    href: "/others",
   },
 ];
 
@@ -155,9 +155,9 @@ export default function Navbar() {
           </Popover>
 
           <Link
-            href="/about"
+            href="/products"
             className="text-sm font-semibold leading-6 text-gray-900">
-            About
+            Products
           </Link>
           <Link
             href="/blog"
@@ -263,9 +263,9 @@ export default function Navbar() {
                 </Disclosure>
 
                 <Link
-                  href="/about"
+                  href="/products"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                  About
+                  Products
                 </Link>
                 <Link
                   href="/blog"
