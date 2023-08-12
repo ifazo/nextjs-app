@@ -3,13 +3,13 @@ import Products from "@/components/Products";
 import RootLayout from "@/layouts/RootLayout";
 
 
-export default function Home() {
+export default function Home({ categories}) {
   return (
     <main>
       <Products />
-      <Category />
+      <Category categories={categories} />
     </main>
-  )
+  );
 }
 
 Home.getLayout = function getLayout(page) {
@@ -18,4 +18,15 @@ Home.getLayout = function getLayout(page) {
       {page}
     </RootLayout>
   );
+};
+
+export const getStaticProps = async () => {
+  const res = await fetch("http://localhost:5000/api/categories");
+  const categories = await res.json();
+  console.log(categories);
+  return {
+    props: {
+      categories,
+    },
+  };
 };

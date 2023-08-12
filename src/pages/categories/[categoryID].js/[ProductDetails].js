@@ -1,40 +1,22 @@
-import { useState } from "react";
 import Image from "next/image";
 
+const breadcrumbs = [
+    { id: 1, name: "Women", href: "#" },
+    { id: 2, name: "Clothing", href: "#" },
+  ]
+
 const product = {
+  id: 1,
   name: "Basic Tee",
   price: "$35",
   rating: 3.9,
   reviewCount: 512,
   href: "#",
-  breadcrumbs: [
-    { id: 1, name: "Women", href: "#" },
-    { id: 2, name: "Clothing", href: "#" },
-  ],
-  images:
-    {
-      id: 1,
-      imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/product-page-01-featured-product-shot.jpg",
-      imageAlt: "Back of women's Basic Tee in black.",
-      primary: true,
-    },
-    // {
-    //   id: 2,
-    //   imageSrc:
-    //     "https://tailwindui.com/img/ecommerce-images/product-page-01-product-shot-01.jpg",
-    //   imageAlt: "Side profile of women's Basic Tee in black.",
-    //   primary: false,
-    // },
-    // {
-    //   id: 3,
-    //   imageSrc:
-    //     "https://tailwindui.com/img/ecommerce-images/product-page-01-product-shot-02.jpg",
-    //   imageAlt: "Front of women's Basic Tee in black.",
-    //   primary: false,
-    // },
-  description: "The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.",
-  details: [
+  image:
+    "https://tailwindui.com/img/ecommerce-images/product-page-01-featured-product-shot.jpg",
+  description:
+    "The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.",
+  features: [
     "Only the best materials",
     "Ethically and locally made",
     "Pre-washed and pre-shrunk",
@@ -47,7 +29,6 @@ function classNames(...classes) {
 }
 
 export default function ProductDetails() {
-
   return (
     <div className="bg-white">
       <div className="pt-6 pb-6 sm:pb-12">
@@ -55,7 +36,7 @@ export default function ProductDetails() {
           aria-label="Breadcrumb"
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ol role="list" className="flex items-center space-x-4">
-            {product.breadcrumbs.map((breadcrumb) => (
+            {breadcrumbs.map((breadcrumb) => (
               <li key={breadcrumb.id}>
                 <div className="flex items-center">
                   <a
@@ -101,7 +82,7 @@ export default function ProductDetails() {
               <div className="mt-4">
                 <h2 className="sr-only">Reviews</h2>
                 <div className="flex items-center">
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm font-medium text-gray-700">
                     {product.rating}
                     <span className="sr-only"> out of 5 stars</span>
                   </p>
@@ -150,9 +131,9 @@ export default function ProductDetails() {
 
               <div className="aspect-h-1 aspect-w-1 grid grid-cols-1 lg:gap-8">
                 <Image
-                  key={product.images.id}
-                  src={product.images.imageSrc}
-                  alt={product.images.imageAlt}
+                  key={product.id}
+                  src={product.image}
+                  alt="Product"
                   width={300}
                   height={480}
                   className="rounded-lg lg:col-span-2 lg:row-span-2"
@@ -160,94 +141,17 @@ export default function ProductDetails() {
               </div>
             </div>
 
-            <div className="mt-8 lg:col-span-6">
+            <div className="mt-2 lg:col-span-6">
               <form>
-                {/* Color picker */}
-                {/* <div>
-                  <h2 className="text-sm font-medium text-gray-900">Color</h2>
-
-                  <RadioGroup
-                    value={selectedColor}
-                    onChange={setSelectedColor}
-                    className="mt-2">
-                    <RadioGroup.Label className="sr-only">
-                      Choose a color
-                    </RadioGroup.Label>
-                    <div className="flex items-center space-x-3">
-                      {product.colors.map((color) => (
-                        <RadioGroup.Option
-                          key={color.name}
-                          value={color}
-                          className={({ active, checked }) =>
-                            classNames(
-                              color.selectedColor,
-                              active && checked ? "ring ring-offset-1" : "",
-                              !active && checked ? "ring-2" : "",
-                              "-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none"
-                            )
-                          }>
-                          <RadioGroup.Label as="p" className="sr-only">
-                            {color.name}
-                          </RadioGroup.Label>
-                          <span
-                            aria-hidden="true"
-                            className={classNames(
-                              color.bgColor,
-                              "h-8 w-8 border border-black border-opacity-10 rounded-full"
-                            )}
-                          />
-                        </RadioGroup.Option>
-                      ))}
-                    </div>
-                  </RadioGroup>
-                </div> */}
-
-                {/* Size picker */}
-                {/* <div className="mt-8">
+                {/* Status */}
+                <div className="mt-2">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-sm font-medium text-gray-900">Size</h2>
-                    <a
-                      href="#"
-                      className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                      See sizing chart
-                    </a>
+                    <h2 className="text-sm font-medium text-gray-900">
+                      Category
+                    </h2>
+                    <h2 className="text-sm font-medium text-gray-900">status</h2>
                   </div>
-
-                  <RadioGroup
-                    value={selectedSize}
-                    onChange={setSelectedSize}
-                    className="mt-2">
-                    <RadioGroup.Label className="sr-only">
-                      Choose a size
-                    </RadioGroup.Label>
-                    <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
-                      {product.sizes.map((size) => (
-                        <RadioGroup.Option
-                          key={size.name}
-                          value={size}
-                          className={({ active, checked }) =>
-                            classNames(
-                              size.inStock
-                                ? "cursor-pointer focus:outline-none"
-                                : "opacity-25 cursor-not-allowed",
-                              active
-                                ? "ring-2 ring-offset-2 ring-indigo-500"
-                                : "",
-                              checked
-                                ? "bg-indigo-600 border-transparent text-white hover:bg-indigo-700"
-                                : "bg-white border-gray-200 text-gray-900 hover:bg-gray-50",
-                              "border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                            )
-                          }
-                          disabled={!size.inStock}>
-                          <RadioGroup.Label as="p">
-                            {size.name}
-                          </RadioGroup.Label>
-                        </RadioGroup.Option>
-                      ))}
-                    </div>
-                  </RadioGroup>
-                </div> */}
+                </div>
 
                 <button
                   type="submit"
@@ -260,7 +164,9 @@ export default function ProductDetails() {
               <div className="mt-10">
                 <h2 className="text-sm font-medium text-gray-900">
                   Description: <br />
-                  <div className="mt-2 prose prose-sm text-gray-500">{product.description}</div>
+                  <div className="mt-2 prose prose-sm text-gray-500">
+                    {product.description}
+                  </div>
                 </h2>
               </div>
 
@@ -271,7 +177,7 @@ export default function ProductDetails() {
 
                 <div className="mt-4 prose prose-sm text-gray-500">
                   <ul role="list">
-                    {product.details.map((item) => (
+                    {product.features.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>

@@ -52,7 +52,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Products() {
+export default function Products({ products : data }) {
+  // console.log(data)
   return (
     <div className="bg-white">
       <div className="max-w-7xl mx-auto overflow-hidden sm:px-6 lg:px-8">
