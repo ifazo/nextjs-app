@@ -1,9 +1,5 @@
 import Image from "next/image";
-
-const breadcrumbs = [
-    { id: 1, name: "Women", href: "#" },
-    { id: 2, name: "Clothing", href: "#" },
-  ]
+import Link from "next/link";
 
 const product = {
   id: 1,
@@ -36,34 +32,32 @@ export default function ProductDetails() {
           aria-label="Breadcrumb"
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ol role="list" className="flex items-center space-x-4">
-            {breadcrumbs.map((breadcrumb) => (
-              <li key={breadcrumb.id}>
-                <div className="flex items-center">
-                  <a
-                    href={breadcrumb.href}
-                    className="mr-4 text-sm font-medium text-gray-900">
-                    {breadcrumb.name}
-                  </a>
-                  <svg
-                    viewBox="0 0 6 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    className="h-5 w-auto text-gray-300">
-                    <path
-                      d="M4.878 4.34H3.551L.27 16.532h1.327l3.281-12.19z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-              </li>
-            ))}
+            <li key={1}>
+              <div className="flex items-center">
+                <Link
+                  href={"/category"}
+                  className="mr-4 text-sm font-medium text-gray-900">
+                  category
+                </Link>
+                <svg
+                  viewBox="0 0 6 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  className="h-5 w-auto text-gray-300">
+                  <path
+                    d="M4.878 4.34H3.551L.27 16.532h1.327l3.281-12.19z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+            </li>
             <li className="text-sm">
-              <a
-                href={product.href}
+              <Link
+                href={"/"}
                 aria-current="page"
                 className="font-medium text-gray-500 hover:text-gray-600">
                 {product.name}
-              </a>
+              </Link>
             </li>
           </ol>
         </nav>
@@ -118,7 +112,7 @@ export default function ProductDetails() {
                     <a
                       href="#"
                       className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                      See all {product.reviewCount} reviews
+                      See all 13 reviews
                     </a>
                   </div>
                 </div>
@@ -149,7 +143,9 @@ export default function ProductDetails() {
                     <h2 className="text-sm font-medium text-gray-900">
                       Category
                     </h2>
-                    <h2 className="text-sm font-medium text-gray-900">status</h2>
+                    <h2 className="text-sm font-medium text-gray-900">
+                      status
+                    </h2>
                   </div>
                 </div>
 

@@ -1,32 +1,30 @@
-import Category from "@/components/Category";
-import Products from "@/components/Products";
+import CategoryCard from "@/components/CategoryCard";
+import ProductCard from "@/components/ProductCard";
 import RootLayout from "@/layouts/RootLayout";
 
+export const getStaticProps = async () => {
+  const productData = await fetch("http://localhost:5000/api/products");
+  const products = await productData.json();
+  const categoryData = await fetch("http://localhost:5000/api/categories");
+  const categories = await categoryData.json();
+  
+  return {
+    props: {
+      products,
+      categories,
+    },
+  };
+};
 
-export default function Home({ categories}) {
+export default function Home({ products, categories }) {
   return (
     <main>
-      <Products />
-      <Category categories={categories} />
+      <ProductCard products={products} />
+      <CategoryCard categories={categories} />
     </main>
   );
 }
 
 Home.getLayout = function getLayout(page) {
-  return (
-    <RootLayout>
-      {page}
-    </RootLayout>
-  );
-};
-
-export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/api/categories");
-  const categories = await res.json();
-  console.log(categories);
-  return {
-    props: {
-      categories,
-    },
-  };
+  return <RootLayout>{page}</RootLayout>;
 };
