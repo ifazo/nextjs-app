@@ -77,7 +77,7 @@ export default function ProductCard({products}) {
               </div>
               <div className="pt-10 pb-4 text-center">
                 <h3 className="text-sm font-medium text-gray-900">
-                  <Link href={`/`}>
+                  <Link href={products._id}>
                     <span aria-hidden="true" className="absolute inset-0" />
                     {product.name}
                   </Link>
@@ -105,7 +105,6 @@ export default function ProductCard({products}) {
                       </svg>
                     ))}
                   </div>
-
                   <p className="mt-1 text-sm text-gray-500">13 reviews</p>
                 </div>
                 <p className="mt-4 text-base font-medium text-gray-900">

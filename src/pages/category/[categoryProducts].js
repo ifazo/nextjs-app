@@ -1,35 +1,30 @@
-import ProductCard from '@/components/ProductCard';
-import RootLayout from '@/layouts/RootLayout'
-import React from 'react'
+import ProductCard from "@/components/ProductCard";
+import RootLayout from "@/layouts/RootLayout";
+import { useRouter } from "next/router";
+import React from "react";
 
-// export const getStaticPaths = async () => {
-//   const res = await fetch("http://localhost:5000");
-//   const products = await res.json();
-//   const paths = products.map((product) => ({
-//     params: { productDetail: product._id },
-//   }));
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// };
 
-export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/api/products");
-  const products = await res.json();
-  console.log(products);
-  return {
-    props: {
-      products,
-    },
-  };
+
+const CategoryProducts = ({ products }) => {
+  
+  const router = useRouter();
+  const { category } = router.query;
+  console.log(category);
+
+   const categoryProducts = products.filter(
+     (product) => product.category === category
+   );
+
+  return (
+    <div>
+      {
+        categoryProducts.map((product) => <ProductCard key={product._id} products={products} />)
+      }
+    </div>
+  )
 };
 
-const CategoryProducts = ({products}) => {
-  return <ProductCard products={products} />;
-}
-
-export default CategoryProducts
+export default CategoryProducts;
 
 CategoryProducts.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;

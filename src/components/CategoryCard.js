@@ -3,7 +3,8 @@ import Link from "next/link";
 
 /* This example requires Tailwind CSS v2.0+ */
 
-export default function CategoryCard({ categories}) {
+export default function CategoryCard({ categories }) {
+  
   return (
     <div className="bg-white">
       <div className="py-16 sm:py-24 xl:max-w-7xl xl:mx-auto xl:px-8">
@@ -25,7 +26,7 @@ export default function CategoryCard({ categories}) {
                 {categories?.map((category) => (
                   <Link
                     key={category.name}
-                    href={`/category/${category.href}`}
+                    href={`/product?category=${category.name}`}
                     className="relative w-56 h-80 rounded-lg p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto">
                     <span aria-hidden="true" className="absolute inset-0">
                       <Image

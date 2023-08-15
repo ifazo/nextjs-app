@@ -1,5 +1,5 @@
-import ProductCard from '@/components/ProductCard'
-import React from 'react'
+import React from "react";
+import CategoryProducts from "../category/[categoryProducts]";
 
 export const getStaticProps = async () => {
   const productData = await fetch("http://localhost:5000/api/products");
@@ -11,12 +11,12 @@ export const getStaticProps = async () => {
   };
 };
 
-const Products = ({products}) => {
+const Category = ({ products }) => {
   return (
-      <div>
-          <ProductCard products={products} />
+    <div>
+      <CategoryProducts products={products} />
     </div>
-  )
-}
+  );
+};
 
-export default Products
+export default Category;

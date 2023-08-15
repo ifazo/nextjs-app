@@ -1,5 +1,5 @@
-import ProductDetails from '@/components/ProductDetails'
-import React from 'react'
+import ProductDetails from "@/components/ProductDetails";
+import React from "react";
 
 export const getStaticPaths = async () => {
   const res = await fetch("http://localhost:5000/api/products");
@@ -15,7 +15,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const id = context.params.productDetail;
-  const res = await fetch(`http://localhost:5000/api/products/${id}`);
+  const res = await fetch(`http://localhost:5000/api/products/${paths}`);
   const product = await res.json();
   // console.log(product);
   return {
@@ -25,12 +25,12 @@ export const getStaticProps = async (context) => {
   };
 };
 
-const DetailPage = () => {
+const ProductDetailsPage = () => {
   return (
     <div>
-      <ProductDetails />
+      <ProductDetails product={product}/>
     </div>
-  )
-}
+  );
+};
 
-export default DetailPage
+export default ProductDetailsPage;
