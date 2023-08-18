@@ -1,9 +1,10 @@
-'use client'
+"use client";
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../public/logo.png"
+import logo from "../../public/logo.png";
 
 const products = [
   {
@@ -18,7 +19,7 @@ const products = [
   },
   {
     name: "RAM",
-    description: "Your customers’ data will be safe and secure",
+    description: "Your customers data will be safe and secure",
     href: "/ram",
   },
   {
@@ -48,6 +49,7 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const { data: session } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -166,11 +168,19 @@ export default function Navbar() {
           </Link>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link
-            href="/login"
-            className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </Link>
+          {session?.user ? (
+            <button
+              onClick={() => signOut()}
+              className="text-sm font-semibold leading-6 text-gray-900">
+              Sign out <span aria-hidden="true">&rarr;</span>
+            </button>
+          ) : (
+            <Link
+              href="/signin"
+              className="text-sm font-semibold leading-6 text-gray-900">
+              Sign in <span aria-hidden="true">&rarr;</span>
+            </Link>
+          )}
         </div>
       </nav>
       <Dialog
@@ -274,11 +284,17 @@ export default function Navbar() {
                 </Link>
               </div>
               <div className="py-6">
-                <Link
-                  href="/login"
+                {
+                  session?.user ? (<button
+                  onClick={() => signOut()}
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                  Log in
-                </Link>
+                  Sign out
+                </button>) : (<Link
+                  href="/signin"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                  Sign in
+                </Link>)
+                }
               </div>
             </div>
           </div>

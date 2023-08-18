@@ -2,24 +2,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 import logo from '../../public/logo.png'
+import { signIn } from 'next-auth/react';
 
 const signin = () => {
   return (
     <div className="h-full bg-gray-50">
-      {/*
-          This example requires updating your template:
-  
-          ```
-          <html class="h-full bg-gray-50">
-          <body class="h-full">
-          ```
-        */}
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <Image
             className="mx-auto h-12 w-auto"
             src={logo}
-            width={ 48 }
+            width={48}
             height={48}
             alt="Workflow"
           />
@@ -39,7 +32,7 @@ const signin = () => {
 
           <p className="mt-2 text-center text-sm text-gray-600">
             <Link
-              href="/sign-up"
+              href="/signup"
               className="font-medium text-indigo-600 hover:text-indigo-500">
               Do not have an account? Sign up
             </Link>
@@ -133,6 +126,11 @@ const signin = () => {
               <div className="mt-6 grid grid-cols-3 gap-3">
                 <div>
                   <button
+                    onClick={() =>
+                      signIn("facebook", {
+                        callbackUrl: "http://localhost:3000",
+                      })
+                    }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                     <span className="sr-only">Sign in with Facebook</span>
                     <svg
@@ -151,8 +149,11 @@ const signin = () => {
 
                 <div>
                   <button
+                    onClick={() =>
+                      signIn("google", { callbackUrl: "http://localhost:3000" })
+                    }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                    <span className="sr-only">Sign in with Twitter</span>
+                    <span className="sr-only">Sign in with Google</span>
                     <svg
                       className="w-5 h-5"
                       aria-hidden="true"
@@ -165,6 +166,9 @@ const signin = () => {
 
                 <div>
                   <button
+                    onClick={() =>
+                      signIn("github", { callbackUrl: "http://localhost:3000" })
+                    }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                     <span className="sr-only">Sign in with GitHub</span>
                     <svg

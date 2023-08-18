@@ -1,26 +1,41 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react'
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import { signIn } from "next-auth/react";
 import logo from "../../public/logo.png";
+import { useForm } from "react-hook-form";
 
-const signup = () => {
+const Signup = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const onSubmit = async (data) => {
+    const res = await fetch("http://localhost:5000/api/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const result = await res.json();
+    if (result.error) {
+      setError(result.error);
+    } else {
+      signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        callbackUrl: "http://localhost:3000",
+      });
+    }
+  };
+
   return (
     <div className="h-full bg-gray-50">
-      {/*
-          This example requires updating your template:
-  
-          ```
-          <html class="h-full bg-gray-50">
-          <body class="h-full">
-          ```
-        */}
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <Image
             className="mx-auto h-12 w-auto"
             src={logo}
             alt="Workflow"
-            height={ 48 }
+            height={48}
             width={48}
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -47,7 +62,7 @@ const signup = () => {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" action="#" method="POST">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div>
                 <label
                   htmlFor="name"
@@ -56,14 +71,15 @@ const signup = () => {
                 </label>
                 <div className="mt-1">
                   <input
+                    {...register("name", { required: true })}
                     id="name"
-                    name="name"
                     type="text"
                     autoComplete="name"
                     required
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
+                {errors.name && <span>Name field is required</span>}
               </div>
 
               <div>
@@ -74,14 +90,15 @@ const signup = () => {
                 </label>
                 <div className="mt-1">
                   <input
+                    {...register("email", { required: true })}
                     id="email"
-                    name="email"
                     type="email"
                     autoComplete="email"
                     required
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
+                {errors.email && <span>E-mail field is required</span>}
               </div>
 
               <div>
@@ -92,14 +109,15 @@ const signup = () => {
                 </label>
                 <div className="mt-1">
                   <input
+                    {...register("password", { required: true })}
                     id="password"
-                    name="password"
                     type="password"
                     autoComplete="current-password"
                     required
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
+                {errors.password && <span>Password field is required</span>}
               </div>
 
               <div className="flex items-center justify-between">
@@ -111,7 +129,7 @@ const signup = () => {
                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                   />
 
-                  <div className="text-sm">
+                  <div className="text-sm mr-2">
                     <Link
                       href="/terms"
                       className="font-medium text-indigo-600 hover:text-indigo-500">
@@ -145,6 +163,11 @@ const signup = () => {
               <div className="mt-6 grid grid-cols-3 gap-3">
                 <div>
                   <button
+                    onClick={() =>
+                      signIn("facebook", {
+                        callbackUrl: "http://localhost:3000",
+                      })
+                    }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                     <span className="sr-only">Sign in with Facebook</span>
                     <svg
@@ -163,8 +186,11 @@ const signup = () => {
 
                 <div>
                   <button
+                    onClick={() =>
+                      signIn("google", { callbackUrl: "http://localhost:3000" })
+                    }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                    <span className="sr-only">Sign in with Twitter</span>
+                    <span className="sr-only">Sign in with Google</span>
                     <svg
                       className="w-5 h-5"
                       aria-hidden="true"
@@ -177,6 +203,9 @@ const signup = () => {
 
                 <div>
                   <button
+                    onClick={() =>
+                      signIn("github", { callbackUrl: "http://localhost:3000" })
+                    }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                     <span className="sr-only">Sign in with GitHub</span>
                     <svg
@@ -199,6 +228,6 @@ const signup = () => {
       </div>
     </div>
   );
-}
+};
 
-export default signup
+export default Signup;
