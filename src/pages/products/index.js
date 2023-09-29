@@ -1,18 +1,18 @@
-import ProductCard from "@/components/ProductCard";
+import ProductCard from "@/components/ProductList";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export const getStaticProps = async () => {
-  const productData = await fetch("http://localhost:5000/api/products");
-  const products = await productData.json();
-  return {
-    props: {
-      products,
-    },
-  };
-};
+// export const getStaticProps = async () => {
+//   const productData = await fetch("http://localhost:5000/api/products");
+//   const products = await productData.json();
+//   return {
+//     props: {
+//       products,
+//     },
+//   };
+// };
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -29,7 +29,8 @@ const Products = ({ products }) => {
               Products
             </h1>
             <p className="mt-4 max-w-xl mx-auto text-base text-gray-500">
-              All products of our store is displayed here. You can filter them by category.
+              All products of our store is displayed here. You can filter them
+              by category.
             </p>
           </div>
 

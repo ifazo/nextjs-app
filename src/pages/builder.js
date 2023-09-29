@@ -41,13 +41,13 @@ export default function Builder() {
     <div className="bg-white">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-0">
         <h1 className="text-3xl font-extrabold text-center tracking-tight text-gray-900 sm:text-4xl">
-          Shopping Cart
+          PC Builder
         </h1>
 
         <form className="mt-12">
           <section aria-labelledby="cart-heading">
             <h2 id="cart-heading" className="sr-only">
-              Items in your shopping cart
+              Items in your PC Builder list
             </h2>
 
             <ul

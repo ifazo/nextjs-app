@@ -1,10 +1,40 @@
 import Image from "next/image";
-import Link from "next/link";
 
 /* This example requires Tailwind CSS v2.0+ */
+const categories = [
+  {
+    name: "New Arrivals",
+    href: "#",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/home-page-01-category-01.jpg",
+  },
+  {
+    name: "Productivity",
+    href: "#",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/home-page-01-category-02.jpg",
+  },
+  {
+    name: "Workspace",
+    href: "#",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/home-page-01-category-04.jpg",
+  },
+  {
+    name: "Accessories",
+    href: "#",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/home-page-01-category-05.jpg",
+  },
+  {
+    name: "Sale",
+    href: "#",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/home-page-01-category-03.jpg",
+  },
+];
 
-export default function CategoryCard({ categories }) {
-  
+export default function CategoryList() {
   return (
     <div className="bg-white">
       <div className="py-16 sm:py-24 xl:max-w-7xl xl:mx-auto xl:px-8">
@@ -23,17 +53,17 @@ export default function CategoryCard({ categories }) {
           <div className="-my-2">
             <div className="box-content py-2 relative h-80 overflow-x-auto xl:overflow-visible">
               <div className="absolute min-w-screen-xl px-4 flex space-x-8 sm:px-6 lg:px-8 xl:relative xl:px-0 xl:space-x-0 xl:grid xl:grid-cols-5 xl:gap-x-8">
-                {categories?.map((category) => (
-                  <Link
+                {categories.map((category) => (
+                  <a
                     key={category.name}
-                    href={`/product?category=${category.name}`}
+                    href={category.href}
                     className="relative w-56 h-80 rounded-lg p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto">
                     <span aria-hidden="true" className="absolute inset-0">
                       <Image
+                        height={320}
+                        width={224}
                         src={category.imageSrc}
-                        alt="category"
-                        width={100}
-                        height={100}
+                        alt=""
                         className="w-full h-full object-center object-cover"
                       />
                     </span>
@@ -44,7 +74,7 @@ export default function CategoryCard({ categories }) {
                     <span className="relative mt-auto text-center text-xl font-bold text-white">
                       {category.name}
                     </span>
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>

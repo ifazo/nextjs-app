@@ -5,17 +5,17 @@ import { signIn } from "next-auth/react";
 import logo from "../../public/logo.png";
 import { useForm } from "react-hook-form";
 
-const createUser = async (data) => {
-  const res = await fetch("http://localhost:5000/api/users", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  const result = await res.json();
-  return result;
-};
+// const createUser = async (data) => {
+//   const res = await fetch("http://localhost:5000/api/users", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(data),
+//   });
+//   const result = await res.json();
+//   return result;
+// };
 
 const Signup = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
