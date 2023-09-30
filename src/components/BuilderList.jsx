@@ -28,18 +28,6 @@ const categories = [
   },
 ];
 
-// const people = [
-//   {
-//     name: "Lindsay Walton",
-//     title: "Front-end Developer",
-//     department: "Optimization",
-//     email: "lindsay.walton@example.com",
-//     role: "$250",
-//     image:
-//       "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-//   },
-// ];
-
 export default function BuilderList() {
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -120,7 +108,7 @@ export default function BuilderList() {
                       </td>
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                         <Link
-                          href={`/api/products?category=${category.name}`}
+                          href={`/builder/${category.name}`}
                           className="text-indigo-600 hover:text-indigo-900">
                           Select
                         </Link>
