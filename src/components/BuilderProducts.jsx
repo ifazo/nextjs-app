@@ -1,4 +1,7 @@
+import { setProducts } from "@/store/features/productSlice";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
 const people = [
   {
@@ -13,8 +16,14 @@ const people = [
   },
 ];
 
-export default function BuilderProducts ( { data } ) {
-  console.log(data)
+export default function BuilderProducts ( { products } ) {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const handleAddProduct = (product) => {
+    dispatch(setProducts(product));
+  };
+
   return (
     <>
       <div className="px-4 sm:px-6 lg:px-8">
@@ -56,8 +65,8 @@ export default function BuilderProducts ( { data } ) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {people.map((person) => (
-                      <tr key={person._id}>
+                    {products?.products.map((product) => (
+                      <tr key={product._id}>
                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                           <div className="flex items-center">
                             <div className="h-10 w-10 flex-shrink-0">
@@ -73,20 +82,22 @@ export default function BuilderProducts ( { data } ) {
                             </div>
                             <div className="ml-4">
                               <div className="font-medium text-gray-900">
-                                {person.name}
+                                {product.name}
                               </div>
                               <div className="text-gray-500">
-                                {person.email}
+                                {product.email}
                               </div>
                             </div>
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          <div className="text-gray-900">{person.category}</div>
+                          <div className="text-gray-900">
+                            {product.category}
+                          </div>
                           <div className="text-gray-500">Required</div>
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          $250
+                          {product.price}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
@@ -96,7 +107,7 @@ export default function BuilderProducts ( { data } ) {
                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                           <button
                             type="button"
-                            onClick={() => router.push("/builder")}
+                            onClick={() => {handleAddProduct(product), router.push("/builder");}}
                             className="text-indigo-600 hover:text-indigo-900">
                             Add To Builder
                           </button>
