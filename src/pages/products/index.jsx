@@ -4,15 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-// export const getStaticProps = async () => {
-//   const productData = await fetch("http://localhost:5000/api/products");
-//   const products = await productData.json();
-//   return {
-//     props: {
-//       products,
-//     },
-//   };
-// };
+export async function getStaticProps() {
+  const res = await fetch("http://localhost:3000/api/products");
+  const products = await res.json();
+  // console.log(products);
+  return {
+    props: {
+      products,
+    },
+  };
+}
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
