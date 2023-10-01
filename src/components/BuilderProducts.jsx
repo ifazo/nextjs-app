@@ -1,7 +1,7 @@
 import { setProducts } from "@/store/features/productSlice";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const people = [
   {
@@ -16,8 +16,10 @@ const people = [
   },
 ];
 
-export default function BuilderProducts ( { products } ) {
+export default function BuilderProducts({ products }) {
   const router = useRouter();
+  const { products : components} = useSelector((state) => state.products);
+  console.log(components);
   const dispatch = useDispatch();
 
   const handleAddProduct = (product) => {
@@ -107,7 +109,10 @@ export default function BuilderProducts ( { products } ) {
                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                           <button
                             type="button"
-                            onClick={() => {handleAddProduct(product), router.push("/builder");}}
+                            onClick={() => {
+                              handleAddProduct(product),
+                                router.push("/builder");
+                            }}
                             className="text-indigo-600 hover:text-indigo-900">
                             Add To Builder
                           </button>
