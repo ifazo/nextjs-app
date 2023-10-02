@@ -30,19 +30,10 @@ const categories = [
   },
 ];
 
-export async function getServerSideProps({ params: { category } }) {
-  const res = await fetch(
-    `http://localhost:3000/api/products?category=${category}`
-  );
-  const data = await res.json();
-  // console.log(data)
-  return { props: { data } };
-}
-
 export default function BuilderProducts({ data }) {
   const router = useRouter();
-  const { products } = useSelector((state) => state.products);
-
+  const category = router.query.category;
+  const products = data.products;
   const dispatch = useDispatch();
 
   const handleAddProduct = (product) => {
@@ -96,7 +87,7 @@ export default function BuilderProducts({ data }) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {data?.products.map((product) => (
+                    {products.map((product) => (
                       <tr key={product._id}>
                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                           <div className="flex items-center">
@@ -104,35 +95,35 @@ export default function BuilderProducts({ data }) {
                               <Image
                                 width={40}
                                 height={40}
-                                className="h-10 w-10 rounded-full"
-                                src={
-                                  "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                }
+                                className="h-10 w-10 rounded-sm"
+                                src={product.image}
                                 alt=""
                               />
                             </div>
                             <div className="ml-4">
-                              <div className="font-medium text-gray-900">
+                              <div className="font-bold text-gray-900">
                                 {product.name}
                               </div>
-                              <div className="text-gray-500">
-                                {product.email}
+                              <div className="font-semibold text-gray-500">
+                                Rating: {product.rating}
                               </div>
                             </div>
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          <div className="text-gray-900">
+                          <div className="font-semibold text-gray-900">
                             {product.category}
                           </div>
-                          <div className="text-gray-500">Required</div>
+                          <div className="font-medium text-gray-500">
+                            Required
+                          </div>
                         </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {product.price}
+                        <td className="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-500">
+                          ${product.price}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-                            Available
+                            {product.status}
                           </span>
                         </td>
                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">

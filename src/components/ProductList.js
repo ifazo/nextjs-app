@@ -19,19 +19,8 @@ const products = [
   // More products...
 ];
 
-
-export async function getStaticProps() {
-  const res = await fetch("http://localhost:3000/api/products");
-  const products = await res.json();
-  // console.log(products);
-  return {
-    props: {
-      products,
-    },
-  };
-}
-
-export default function ProductList() {
+export default function ProductList({data}) {
+  console.log(data.products);
   return (
     <div className="bg-white">
       <div className="py-16 sm:py-24 lg:max-w-7xl lg:mx-auto lg:px-8">
@@ -51,9 +40,9 @@ export default function ProductList() {
             <ul
               role="list"
               className="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:space-x-0 lg:grid lg:grid-cols-4 lg:gap-x-8">
-              {products.map((product) => (
+              {data?.products.map((product) => (
                 <li
-                  key={product.id}
+                  key={product._id}
                   className="w-64 inline-flex flex-col text-center lg:w-auto">
                   <div className="group relative">
                     <div className="w-full bg-gray-200 rounded-md overflow-hidden aspect-w-1 aspect-h-1">
@@ -67,19 +56,25 @@ export default function ProductList() {
                     </div>
                     <div className="mt-6">
                       <h3 className="mt-1 font-semibold text-gray-900">
-                        <Link href={product.href}>
+                        <Link
+                          href={`products/${product._id}`}
+                        >
                           <span className="absolute inset-0" />
                           {product.name}
                         </Link>
                       </h3>
                       <div className="m-3 flex justify-between">
-                        <p className="text-gray-500">{product.color}</p>
-                        <p className="text-gray-700">{product.price}</p>
+                        <p className="font-medium text-gray-700">
+                          {product.category}
+                        </p>
+                        <p className="font-medium text-gray-700">
+                          ${product.price}
+                        </p>
                       </div>
                     </div>
                   </div>
 
-                  <h4 className="sr-only">Available colors</h4>
+                  {/* <h4 className="sr-only">Available colors</h4>
                   <ul
                     role="list"
                     className="mt-auto pt-6 flex items-center justify-center space-x-3">
@@ -91,7 +86,7 @@ export default function ProductList() {
                         <span className="sr-only">{color.name}</span>
                       </li>
                     ))}
-                  </ul>
+                  </ul> */}
                 </li>
               ))}
             </ul>

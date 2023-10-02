@@ -4,7 +4,6 @@ import React from "react";
 export const getStaticPaths = async () => {
   const res = await fetch("http://localhost:3000/api/products");
   const data = await res.json();
-  console.log(data);
   const paths = data.products.map((product) => {
     return {
       params: {
@@ -23,6 +22,7 @@ export const getStaticProps = async (context) => {
   const { product } = context.params;
   const res = await fetch(`http://localhost:3000/api/products/${product}`);
   const data = await res.json();
+  console.log(data);
   return {
     props: {
       data,
@@ -30,11 +30,10 @@ export const getStaticProps = async (context) => {
   };
 };
 
-const Product = ({ data }) => {
-  console.log(data.product);
+const Product = ({data}) => {
   return (
     <div>
-      <ProductDetails />
+      <ProductDetails data={data} />
     </div>
   );
 };

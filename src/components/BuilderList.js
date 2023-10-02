@@ -3,41 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 
-const categories = [
-  {
-    _id: 1,
-    name: "CPU",
-  },
-  {
-    _id: 2,
-    name: "Motherboard",
-  },
-  {
-    _id: 3,
-    name: "RAM",
-  },
-  {
-    _id: 4,
-    name: "Power Supply Unit",
-  },
-  {
-    _id: 5,
-    name: "Storage Device",
-  },
-  {
-    _id: 6,
-    name: "Monitor",
-  },
-];
-
-// export async function getServerSideProps() {
-//   const res = await fetch(`https://.../data`)
-//   const data = await res.json()
-//   return { props: { data } }
-// }
-
 export default function BuilderList({ data }) {
-  console.log(data)
+  const categories = data.categories;
   const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const handleClearProducts = () => {
@@ -98,35 +65,37 @@ export default function BuilderList({ data }) {
                                   <Image
                                     width={40}
                                     height={40}
-                                    className="h-10 w-10 rounded-full"
-                                    src={
-                                      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    }
+                                    className="h-10 w-10 rounded-sm"
+                                    src={product ? product.image : ""}
                                     alt=""
                                   />
                                 </div>
                                 <div className="ml-4">
                                   <div className="font-medium text-gray-900">
-                                    Lindsay Walton
+                                    {product
+                                      ? product.name
+                                      : "No product selected"}
                                   </div>
                                   <div className="text-gray-500">
-                                    {product ? product.name : "No product"}
+                                    {product ? product.rating : "No rating"}
                                   </div>
                                 </div>
                               </div>
                             </td>
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              <div className="text-gray-900">
+                              <div className="font-medium text-gray-900">
                                 {category.name}
                               </div>
-                              <div className="text-gray-500">Required</div>
+                              <div className="font-normal text-gray-500">
+                                Required
+                              </div>
                             </td>
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              $250
+                              ${product ? product.price : "--"}
                             </td>
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                               <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-                                Active
+                                {product ? product.status : "No status"}
                               </span>
                             </td>
                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">

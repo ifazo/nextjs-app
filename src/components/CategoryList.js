@@ -34,19 +34,8 @@ const categories = [
   },
 ];
 
-
-export async function getStaticProps() {
-  const res = await fetch("http://localhost:3000/api/categories");
-  const categories = await res.json();
-  // console.log(categories);
-  return {
-    props: {
-      categories,
-    },
-  };
-}
-
-export default function CategoryList() {
+export default function CategoryList({ data }) {
+  console.log(data.categories);
   return (
     <div className="bg-white">
       <div className="py-16 sm:py-24 xl:max-w-7xl xl:mx-auto xl:px-8">
@@ -65,16 +54,16 @@ export default function CategoryList() {
           <div className="-my-2">
             <div className="box-content py-2 relative h-80 overflow-x-auto xl:overflow-visible">
               <div className="absolute min-w-screen-xl px-4 flex space-x-8 sm:px-6 lg:px-8 xl:relative xl:px-0 xl:space-x-0 xl:grid xl:grid-cols-5 xl:gap-x-8">
-                {categories.map((category) => (
+                {data?.categories.map((category) =>
                   <a
-                    key={category.name}
-                    href={category.href}
+                    key={category._id}
+                    href={category.name}
                     className="relative w-56 h-80 rounded-lg p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto">
                     <span aria-hidden="true" className="absolute inset-0">
                       <Image
                         height={320}
                         width={224}
-                        src={category.imageSrc}
+                        src={category.image}
                         alt=""
                         className="w-full h-full object-center object-cover"
                       />
@@ -87,7 +76,7 @@ export default function CategoryList() {
                       {category.name}
                     </span>
                   </a>
-                ))}
+                )}
               </div>
             </div>
           </div>
