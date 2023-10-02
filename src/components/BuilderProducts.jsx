@@ -1,29 +1,49 @@
-import { setProducts } from "@/store/features/productSlice";
+import { addProduct, removeProduct } from "@/store/features/productSlice";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
-const people = [
+const categories = [
   {
     _id: 1,
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    category: "Optimization",
-    email: "lindsay.walton@example.com",
-    price: "$250",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    name: "CPU",
+  },
+  {
+    _id: 2,
+    name: "Motherboard",
+  },
+  {
+    _id: 3,
+    name: "RAM",
+  },
+  {
+    _id: 4,
+    name: "Power Supply Unit",
+  },
+  {
+    _id: 5,
+    name: "Storage Device",
+  },
+  {
+    _id: 6,
+    name: "Monitor",
   },
 ];
 
-export default function BuilderProducts({ products }) {
+export default function BuilderProducts({ data }) {
   const router = useRouter();
-  const { products : components} = useSelector((state) => state.products);
-  console.log(components);
+  const { products } = useSelector((state) => state.products);
+
   const dispatch = useDispatch();
 
   const handleAddProduct = (product) => {
-    dispatch(setProducts(product));
+    dispatch(addProduct(product));
+  };
+
+  const handleRemoveProduct = (product) => {
+    if (product.category === router.query.category) {
+      dispatch(removeProduct(product));
+    }
   };
 
   return (
@@ -67,7 +87,7 @@ export default function BuilderProducts({ products }) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {products?.products.map((product) => (
+                    {data?.products.map((product) => (
                       <tr key={product._id}>
                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                           <div className="flex items-center">
@@ -110,7 +130,8 @@ export default function BuilderProducts({ products }) {
                           <button
                             type="button"
                             onClick={() => {
-                              handleAddProduct(product),
+                              handleRemoveProduct(product),
+                                handleAddProduct(product),
                                 router.push("/builder");
                             }}
                             className="text-indigo-600 hover:text-indigo-900">
@@ -135,8 +156,9 @@ export default function BuilderProducts({ products }) {
           <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
             <button
               type="button"
+              onClick={() => router.push("/builder")}
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
-              Add user
+              Back
             </button>
           </div>
         </div>

@@ -13,7 +13,7 @@ export async function getServerSideProps({ params: { category } }) {
 export default function builderCategory({ data }) {
   return (
     <>
-      <BuilderProducts products={data} />
+      <BuilderProducts data={data} />
     </>
   );
 }
