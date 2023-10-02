@@ -7,7 +7,7 @@ export default async function productHandler(req, res) {
   const productCollection = database.collection("products");
   if (req.method === "GET") {
     const product = await productCollection.findOne({ _id: new ObjectId(pid) });
-    res.status(200).json({ product });
+    res.send({ product });
   } else if (req.method === "DELETE") {
     const result = await productCollection.deleteOne({
       _id: new ObjectId(pid),

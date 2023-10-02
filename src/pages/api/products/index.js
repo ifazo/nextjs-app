@@ -8,14 +8,14 @@ export default async function productsHandler ( req, res ) {
     const products = await productCollection
       .find({ category: category })
       .toArray();
-    res.status(200).json({ products });
+    res.send({ products });
   } else if (req.method === "POST") {
     const result = await productCollection.insertOne(data);
     res.send(result);
   } else if (req.method === "GET") {
     const products = await productCollection.find({}).toArray();
-    res.status(200).json({ products });
+    res.send({ products });
   } else {
-    res.status(400).json({ error: "Bad request" });
+    res.send({ error: "Bad request" });
   }
 }

@@ -19,6 +19,18 @@ const products = [
   // More products...
 ];
 
+
+export async function getStaticProps() {
+  const res = await fetch("http://localhost:3000/api/products");
+  const products = await res.json();
+  // console.log(products);
+  return {
+    props: {
+      products,
+    },
+  };
+}
+
 export default function ProductList() {
   return (
     <div className="bg-white">

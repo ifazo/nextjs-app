@@ -1,7 +1,7 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 const uri = process.env.MONGODB_URI;
 
-export const client = new MongoClient(uri, {
+const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
@@ -11,6 +11,6 @@ export const client = new MongoClient(uri, {
 
 export const database = client.db("PCbuilder");
 
-export default async function handler ( req, res ) {
-  res.status(200).json({ message: "MongoDB connected to Next.js successfully!" });
+export default async function handler(res) {
+  res.send({ message: "MongoDB connected to Next.js successfully!" });
 }

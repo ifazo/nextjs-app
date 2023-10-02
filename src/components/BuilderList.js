@@ -30,7 +30,14 @@ const categories = [
   },
 ];
 
-export default function BuilderList() {
+// export async function getServerSideProps() {
+//   const res = await fetch(`https://.../data`)
+//   const data = await res.json()
+//   return { props: { data } }
+// }
+
+export default function BuilderList({ data }) {
+  console.log(data)
   const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const handleClearProducts = () => {

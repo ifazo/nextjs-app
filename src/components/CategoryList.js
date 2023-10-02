@@ -34,6 +34,18 @@ const categories = [
   },
 ];
 
+
+export async function getStaticProps() {
+  const res = await fetch("http://localhost:3000/api/categories");
+  const categories = await res.json();
+  // console.log(categories);
+  return {
+    props: {
+      categories,
+    },
+  };
+}
+
 export default function CategoryList() {
   return (
     <div className="bg-white">

@@ -30,6 +30,15 @@ const categories = [
   },
 ];
 
+export async function getServerSideProps({ params: { category } }) {
+  const res = await fetch(
+    `http://localhost:3000/api/products?category=${category}`
+  );
+  const data = await res.json();
+  // console.log(data)
+  return { props: { data } };
+}
+
 export default function BuilderProducts({ data }) {
   const router = useRouter();
   const { products } = useSelector((state) => state.products);
