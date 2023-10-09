@@ -18,8 +18,12 @@ import { useForm } from "react-hook-form";
 // };
 
 const Signup = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const onSubmit = async (data) => {
     const result = await createUser(data);
     if (result.error) {
@@ -28,7 +32,7 @@ const Signup = () => {
       signIn("credentials", {
         email: data.email,
         password: data.password,
-        callbackUrl: "http://localhost:3000",
+        callbackUrl: "http://localhost:3000/",
       });
     }
   };
@@ -171,7 +175,7 @@ const Signup = () => {
                   <button
                     onClick={() =>
                       signIn("facebook", {
-                        callbackUrl: "http://localhost:3000",
+                        callbackUrl: "http://localhost:3000/",
                       })
                     }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
@@ -193,7 +197,9 @@ const Signup = () => {
                 <div>
                   <button
                     onClick={() =>
-                      signIn("google", { callbackUrl: "http://localhost:3000" })
+                      signIn("google", {
+                        callbackUrl: "http://localhost:3000/",
+                      })
                     }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                     <span className="sr-only">Sign in with Google</span>
@@ -210,7 +216,9 @@ const Signup = () => {
                 <div>
                   <button
                     onClick={() =>
-                      signIn("github", { callbackUrl: "http://localhost:3000" })
+                      signIn("github", {
+                        callbackUrl: "http://localhost:3000/",
+                      })
                     }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                     <span className="sr-only">Sign in with GitHub</span>

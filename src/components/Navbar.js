@@ -1,41 +1,10 @@
 "use client";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/logo.png";
-
-const products = [
-  {
-    name: "Processor",
-    description: "Get a better understanding of your traffic",
-  },
-  {
-    name: "Motherboard",
-    description: "Speak directly to your customers",
-  },
-  {
-    name: "RAM",
-    description: "Your customers data will be safe and secure",
-  },
-  {
-    name: "Power Supply Unit",
-    description: "Connect with third-party tools",
-  },
-  {
-    name: "Storage Device",
-    description: "Build strategic funnels that will convert",
-  },
-  {
-    name: "Monitor",
-    description: "Build strategic funnels that will convert",
-  },
-  {
-    name: "Others",
-    description: "Build strategic funnels that will convert",
-  },
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -44,7 +13,15 @@ function classNames(...classes) {
 export default function Navbar() {
   const { data: session } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  // console.log(data)
+  const [data, setData] = useState([]);
+  
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/categories`)
+      .then((res) => res.json())
+      .then((data) => setData(data))
+  }, [])
+  
+
   return (
     <header className="bg-white">
       <nav
@@ -58,7 +35,7 @@ export default function Navbar() {
               width={32}
               className="h-8 w-auto"
               src={logo}
-              alt=""
+              alt="logo"
             />
           </Link>
         </div>
@@ -123,24 +100,31 @@ export default function Navbar() {
               leaveTo="opacity-0 translate-y-1">
               <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                 <div className="p-4">
-                  {products.map((item) => (
+                  {data?.categories?.map((category) => (
                     <div
-                      key={item.name}
+                      key={category._id}
                       className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
                       <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                         {/* <item.icon
                           className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
                           aria-hidden="true"
                         /> */}
+                        <Image
+                          width={24}
+                          height={24}
+                          src={category.image}
+                          alt="category image"
+                          className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                        />
                       </div>
                       <div className="flex-auto">
                         <Link
-                          href={`/category/${item.name}`}
+                          href={`/category/${category.name}`}
                           className="block font-semibold text-gray-900">
-                          {item.name}
+                          {category.name}
                           <span className="absolute inset-0" />
                         </Link>
-                        <p className="mt-1 text-gray-600">{item.description}</p>
+                        {/* <p className="mt-1 text-gray-600">{item.description}</p> */}
                       </div>
                     </div>
                   ))}
@@ -251,13 +235,13 @@ export default function Navbar() {
                         </div>
                       </Disclosure.Button>
                       <Disclosure.Panel className="mt-2 space-y-2">
-                        {[...products].map((item) => (
+                        {data?.categories?.map((category) => (
                           <Disclosure.Button
-                            key={item.name}
+                            key={category._id}
                             as="a"
-                            href={`/category/${item.href}`}
+                            href={`/category/${category.name}`}
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                            {item.name}
+                            {category.name}
                           </Disclosure.Button>
                         ))}
                       </Disclosure.Panel>
@@ -277,17 +261,19 @@ export default function Navbar() {
                 </Link>
               </div>
               <div className="py-6">
-                {
-                  session?.user ? (<button
-                  onClick={() => signOut()}
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                  Sign out
-                </button>) : (<Link
-                  href="/signin"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                  Sign in
-                </Link>)
-                }
+                {session?.user ? (
+                  <button
+                    onClick={() => signOut()}
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                    Sign out
+                  </button>
+                ) : (
+                  <Link
+                    href="/signin"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                    Sign in
+                  </Link>
+                )}
               </div>
             </div>
           </div>

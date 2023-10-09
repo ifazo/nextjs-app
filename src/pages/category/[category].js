@@ -1,7 +1,6 @@
-import ProductCard from "@/components/ProductList";
-import AllProducts from "@/components/allProducts";
+import AllProducts from "@/components/AllProducts";
 import RootLayout from "@/layouts/RootLayout";
-import { useRouter } from "next/router";
+
 import React from "react";
 
 export const getStaticPaths = async () => {

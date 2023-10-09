@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function CategoryList({ data }) {
   
@@ -7,20 +8,20 @@ export default function CategoryList({ data }) {
       <div className="py-16 sm:py-24 xl:max-w-7xl xl:mx-auto xl:px-8">
         <div className="px-4 sm:px-6 sm:flex sm:items-center sm:justify-between lg:px-8 xl:px-0">
           <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
-            Browse by Category
+            Featured Category
           </h2>
-          <a
-            href="#"
+          <Link
+            href="/category"
             className="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block">
             Browse all categories<span aria-hidden="true"> &rarr;</span>
-          </a>
+          </Link>
         </div>
 
         <div className="mt-4 flow-root">
           <div className="-my-2">
             <div className="box-content py-2 relative h-80 overflow-x-auto xl:overflow-visible">
               <div className="absolute min-w-screen-xl px-4 flex space-x-8 sm:px-6 lg:px-8 xl:relative xl:px-0 xl:space-x-0 xl:grid xl:grid-cols-5 xl:gap-x-8">
-                {data?.categories.map((category) =>
+                {data?.categories.map((category) => (
                   <a
                     key={category._id}
                     href={`/category/${category.name}`}
@@ -42,7 +43,7 @@ export default function CategoryList({ data }) {
                       {category.name}
                     </span>
                   </a>
-                )}
+                ))}
               </div>
             </div>
           </div>

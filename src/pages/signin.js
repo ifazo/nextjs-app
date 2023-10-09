@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react'
-import logo from '../../public/logo.png'
-import { signIn } from 'next-auth/react';
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import logo from "../../public/logo.png";
+import { signIn } from "next-auth/react";
 
 const signin = () => {
   return (
@@ -150,7 +150,9 @@ const signin = () => {
                 <div>
                   <button
                     onClick={() =>
-                      signIn("google", { callbackUrl: "http://localhost:3000" })
+                      signIn("google", {
+                        callbackUrl: "http://localhost:3000",
+                      })
                     }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                     <span className="sr-only">Sign in with Google</span>
@@ -167,7 +169,9 @@ const signin = () => {
                 <div>
                   <button
                     onClick={() =>
-                      signIn("github", { callbackUrl: "http://localhost:3000" })
+                      signIn("github", {
+                        callbackUrl: "http://localhost:3000",
+                      })
                     }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                     <span className="sr-only">Sign in with GitHub</span>
@@ -191,6 +195,6 @@ const signin = () => {
       </div>
     </div>
   );
-}
+};
 
-export default signin
+export default signin;
