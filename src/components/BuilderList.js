@@ -110,7 +110,7 @@ export default function BuilderList({ data }) {
                                 </button>
                               ) : (
                                 <Link
-                                  href={`/builder/${category.name}`}
+                                  href={`/builder/${category._id}`}
                                   className="text-indigo-600 hover:text-indigo-900">
                                   Select
                                 </Link>

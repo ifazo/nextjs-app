@@ -4,17 +4,19 @@ import { database } from "..";
 export default async function productHandler(req, res) {
   const { pid } = req.query;
   const data = req.body;
-  const productCollection = database.collection("products");
+  const productsCollection = database.collection("products");
   if (req.method === "GET") {
-    const product = await productCollection.findOne({ _id: new ObjectId(pid) });
+    const product = await productsCollection.findOne({
+      _id: new ObjectId(pid),
+    });
     res.send({ product });
   } else if (req.method === "DELETE") {
-    const result = await productCollection.deleteOne({
+    const result = await productsCollection.deleteOne({
       _id: new ObjectId(pid),
     });
     res.send(result);
   } else if (req.method === "PATCH") {
-    const result = await productCollection.updateOne(
+    const result = await productsCollection.updateOne(
       { _id: new ObjectId(pid) },
       { $set: data }
     );
