@@ -4,6 +4,7 @@ import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
 import { Provider } from "react-redux";
 import store from "@/store/store";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +18,7 @@ export default function App({
         <RootLayout>
           <Provider store={store}>
             <Component {...pageProps} />
+            <Toaster />
           </Provider>
         </RootLayout>
       </SessionProvider>

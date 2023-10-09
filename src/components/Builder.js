@@ -78,12 +78,6 @@ export default function BuilderList() {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-200 bg-white">
-                                        {/* {products.map(product => {
-                          if (product.category === category.name) {
-                            console.log(product)
-                            console.log(category)
-                          }
-                        })} */}
                                         <tr>
                                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                                                 <div className="flex items-center">

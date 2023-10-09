@@ -1,46 +1,39 @@
 "use client";
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/logo.png";
 
 const products = [
   {
-    name: "CPU",
+    name: "Processor",
     description: "Get a better understanding of your traffic",
-    href: "/cpu",
   },
   {
     name: "Motherboard",
     description: "Speak directly to your customers",
-    href: "/motherboard",
   },
   {
     name: "RAM",
     description: "Your customers data will be safe and secure",
-    href: "/ram",
   },
   {
     name: "Power Supply Unit",
     description: "Connect with third-party tools",
-    href: "/psu",
   },
   {
     name: "Storage Device",
     description: "Build strategic funnels that will convert",
-    href: "/storage",
   },
   {
     name: "Monitor",
     description: "Build strategic funnels that will convert",
-    href: "/monitor",
   },
   {
     name: "Others",
     description: "Build strategic funnels that will convert",
-    href: "/others",
   },
 ];
 
@@ -51,7 +44,7 @@ function classNames(...classes) {
 export default function Navbar() {
   const { data: session } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  // console.log(data)
   return (
     <header className="bg-white">
       <nav
@@ -142,7 +135,7 @@ export default function Navbar() {
                       </div>
                       <div className="flex-auto">
                         <Link
-                          href={`/product/${item.href}`}
+                          href={`/category/${item.name}`}
                           className="block font-semibold text-gray-900">
                           {item.name}
                           <span className="absolute inset-0" />

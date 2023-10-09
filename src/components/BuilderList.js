@@ -1,14 +1,17 @@
-import { clearProducts } from "@/store/features/productSlice";
+import { removeProduct } from "@/store/features/productSlice";
+import logo from "../../public/favicon.ico";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 export default function BuilderList({ data }) {
   const categories = data.categories;
   const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
-  const handleClearProducts = () => {
-    dispatch(clearProducts());
+
+  const handleRemoveProduct = (product) => {
+    dispatch(removeProduct(product));
   };
 
   return (
@@ -66,7 +69,7 @@ export default function BuilderList({ data }) {
                                     width={40}
                                     height={40}
                                     className="h-10 w-10 rounded-sm"
-                                    src={product ? product.image : ""}
+                                    src={product ? product.image : logo}
                                     alt=""
                                   />
                                 </div>
@@ -99,11 +102,19 @@ export default function BuilderList({ data }) {
                               </span>
                             </td>
                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                              <Link
-                                href={`/builder/${category.name}`}
-                                className="text-indigo-600 hover:text-indigo-900">
-                                Select
-                              </Link>
+                              {product ? (
+                                <button
+                                  onClick={() => handleRemoveProduct(product)}
+                                  className="text-red-600 hover:text-red-900">
+                                  Remove
+                                </button>
+                              ) : (
+                                <Link
+                                  href={`/builder/${category.name}`}
+                                  className="text-indigo-600 hover:text-indigo-900">
+                                  Select
+                                </Link>
+                              )}
                             </td>
                           </>
                         </tr>
@@ -117,18 +128,28 @@ export default function BuilderList({ data }) {
         </div>
         <div className="sm:flex sm:items-center mt-5">
           <div className="sm:flex-auto">
-            <h1 className="text-xl font-semibold text-gray-900">Components</h1>
+            <h1 className="text-xl font-semibold text-gray-900">Complete !!</h1>
             <p className="mt-2 text-sm text-gray-700">
               A list of all the components you have selected for your build.
             </p>
           </div>
           <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-            <button
-              type="button"
-              onClick={() => handleClearProducts()}
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
-              Clear Builder
-            </button>
+            {products.length >= 6 ? (
+              <button
+                type="button"
+                onClick={() => toast.success("Build complete!")}
+                className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
+                Complete
+              </button>
+            ) : (
+              <button
+                  type="button"
+                  disabled
+                onClick={() => console.log("no")}
+                className="cursor-not-allowed inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
+                Complete
+              </button>
+            )}
           </div>
         </div>
       </div>

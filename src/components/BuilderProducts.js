@@ -1,49 +1,15 @@
-import { addProduct, removeProduct } from "@/store/features/productSlice";
+import { addProduct } from "@/store/features/productSlice";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-const categories = [
-  {
-    _id: 1,
-    name: "CPU",
-  },
-  {
-    _id: 2,
-    name: "Motherboard",
-  },
-  {
-    _id: 3,
-    name: "RAM",
-  },
-  {
-    _id: 4,
-    name: "Power Supply Unit",
-  },
-  {
-    _id: 5,
-    name: "Storage Device",
-  },
-  {
-    _id: 6,
-    name: "Monitor",
-  },
-];
 
 export default function BuilderProducts({ data }) {
   const router = useRouter();
-  const category = router.query.category;
-  const products = data.products;
   const dispatch = useDispatch();
 
   const handleAddProduct = (product) => {
     dispatch(addProduct(product));
-  };
-
-  const handleRemoveProduct = (product) => {
-    if (product.category === router.query.category) {
-      dispatch(removeProduct(product));
-    }
   };
 
   return (
@@ -87,7 +53,7 @@ export default function BuilderProducts({ data }) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {products.map((product) => (
+                    {data?.products.map((product) => (
                       <tr key={product._id}>
                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                           <div className="flex items-center">
@@ -130,7 +96,6 @@ export default function BuilderProducts({ data }) {
                           <button
                             type="button"
                             onClick={() => {
-                              handleRemoveProduct(product),
                                 handleAddProduct(product),
                                 router.push("/builder");
                             }}

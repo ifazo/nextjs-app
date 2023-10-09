@@ -22,7 +22,7 @@ function classNames(...classes) {
 }
 
 export default function ProductDetails({ data }) {
-  console.log(data.product);
+  
   const {
     _id,
     name,
@@ -74,7 +74,7 @@ export default function ProductDetails({ data }) {
                     <StarIcon
                       key={rating}
                       className={classNames(
-                        data.product.rating > rating ? "text-indigo-500" : "text-gray-300",
+                        data?.product.rating > rating ? "text-indigo-500" : "text-gray-300",
                         "h-5 w-5 flex-shrink-0"
                       )}
                       aria-hidden="true"

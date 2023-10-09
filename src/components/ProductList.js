@@ -1,26 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const products = [
-  {
-    id: 1,
-    name: "Machined Pen",
-    color: "Black",
-    price: "$35",
-    href: "#",
-    image:
-      "https://tailwindui.com/img/ecommerce-images/home-page-02-product-01.jpg",
-    availableColors: [
-      { name: "Black", colorBg: "#111827" },
-      { name: "Brass", colorBg: "#FDE68A" },
-      { name: "Chrome", colorBg: "#E5E7EB" },
-    ],
-  },
-  // More products...
-];
+export default function ProductList({ data }) {
+  
+  // const totalCount = data.products.length;
+  // const randomIndices = [];
+  // while (randomIndices.length < 6) {
+  //   const randomIndex = Math.floor(Math.random() * totalCount);
+  //   if (!randomIndices.includes(randomIndex)) {
+  //     randomIndices.push(randomIndex);
+  //   }
+  // }
+  // const products = randomIndices.map((index) => data.products[index]);
 
-export default function ProductList({data}) {
-  console.log(data.products);
   return (
     <div className="bg-white">
       <div className="py-16 sm:py-24 lg:max-w-7xl lg:mx-auto lg:px-8">
@@ -29,7 +21,7 @@ export default function ProductList({data}) {
             Trending products
           </h2>
           <Link
-            href="#"
+            href="/products"
             className="hidden sm:block text-sm font-semibold text-indigo-600 hover:text-indigo-500">
             See everything<span aria-hidden="true"> &rarr;</span>
           </Link>
@@ -40,7 +32,7 @@ export default function ProductList({data}) {
             <ul
               role="list"
               className="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:space-x-0 lg:grid lg:grid-cols-4 lg:gap-x-8">
-              {data?.products.map((product) => (
+              {data.products.map((product) => (
                 <li
                   key={product._id}
                   className="w-64 inline-flex flex-col text-center lg:w-auto">
@@ -56,9 +48,7 @@ export default function ProductList({data}) {
                     </div>
                     <div className="mt-6">
                       <h3 className="mt-1 font-semibold text-gray-900">
-                        <Link
-                          href={`products/${product._id}`}
-                        >
+                        <Link href={`products/${product._id}`}>
                           <span className="absolute inset-0" />
                           {product.name}
                         </Link>

@@ -7,7 +7,7 @@ export async function getStaticProps() {
   const data1 = await res1.json();
   const res2 = await fetch("http://localhost:3000/api/categories");
   const data2 = await res2.json();
-
+  
   return {
     props: {
       data1,

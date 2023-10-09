@@ -1,3 +1,6 @@
+import AllProducts from "@/components/allProducts";
+import Image from "next/image";
+import Link from "next/link";
 
 export async function getStaticProps() {
   const res = await fetch("http://localhost:3000/api/products");
@@ -5,17 +8,14 @@ export async function getStaticProps() {
   
   return {
     props: {
-      products: data,
+      data,
     },
   };
 }
 
-const Products = ({ products }) => {
-  console.log(products);
+const Products = ({ data }) => {
   return (
-    <>
-      Product Page 
-    </>
+    <AllProducts data={data} />
   );
 };
 
