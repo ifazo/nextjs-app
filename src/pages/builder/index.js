@@ -7,7 +7,7 @@ export async function getServerSideProps() {
   return { props: { data } };
 }
 
-export default function builder({ data }) {
+export default function Builder({ data }) {
   return (
     <div>
       <BuilderList data={data} />

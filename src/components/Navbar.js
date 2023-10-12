@@ -14,13 +14,12 @@ export default function Navbar() {
   const { data: session } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [data, setData] = useState([]);
-  
+
   useEffect(() => {
-    fetch(`http://localhost:3000/api/categories`)
+    fetch(`/api/categories`)
       .then((res) => res.json())
-      .then((data) => setData(data))
-  }, [])
-  
+      .then((data) => setData(data));
+  }, []);
 
   return (
     <header className="bg-white">
