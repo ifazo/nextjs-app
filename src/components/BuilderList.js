@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
 export default function BuilderList({ data: categories }) {
-  
+  console.log(categories)
   const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 

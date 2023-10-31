@@ -4,14 +4,14 @@ import ProductList from "@/components/ProductList";
 import RootLayout from "@/layouts/RootLayout";
 
 export async function getStaticProps() {
-  if (typeof window !== "undefined") {
-    return {
-      props: {
-        data1: [],
-        data2: [],
-      },
-    };
-  }
+  // if (typeof window !== "undefined") {
+  //   return {
+  //     props: {
+  //       data1: [],
+  //       data2: [],
+  //     },
+  //   };
+  // }
   const res1 = await fetch(`${process.env.NEXTAUTH_URL}/api/products`);
   const data1 = await res1.json();
   const res2 = await fetch(`${process.env.NEXTAUTH_URL}/api/categories`);
@@ -25,7 +25,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ data1, data2 }) {
+export default function Page({ data1, data2 }) {
   return (
     <main>
       <Hero />
@@ -35,6 +35,6 @@ export default function Home({ data1, data2 }) {
   );
 }
 
-Home.getLayout = function getLayout(page) {
+Page.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };

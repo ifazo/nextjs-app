@@ -7,13 +7,20 @@ import CredentialsProvider from "next-auth/providers/credentials";
 export const authOptions = {
   providers: [
     CredentialsProvider({
+      id: "credentials",
       name: "Credentials",
+      type: "credentials",
       credentials: {
         username: { label: "Username", type: "text", placeholder: "Your Name" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
+        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/auth`, {
+          method: "POST",
+          body: JSON.stringify(credentials),
+          headers: { "Content-Type": "application/json" },
+        });
+        const user = await res.json();
         if (user) {
           return user;
         } else {
@@ -38,11 +45,9 @@ export const authOptions = {
     //   from: process.env.EMAIL_FROM,
     // })
   ],
-
   pages: {
     signIn: "/signin",
   },
-
   callbacks: {
     async jwt({ token, account }) {
       if (account) {
@@ -55,6 +60,7 @@ export const authOptions = {
       return session;
     },
   },
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function CategoryList({ data: categories }) {
-  
+  console.log(categories)
   return (
     <div className="bg-white">
       <div className="py-16 sm:py-24 xl:max-w-7xl xl:mx-auto xl:px-8">
@@ -28,8 +28,7 @@ export default function CategoryList({ data: categories }) {
                     className="relative w-56 h-80 rounded-lg p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto">
                     <span aria-hidden="true" className="absolute inset-0">
                       <Image
-                        height={320}
-                        width={224}
+                        layout="fill"
                         src={category.image}
                         alt=""
                         className="w-full h-full object-center object-cover"

@@ -13,16 +13,15 @@ const Signup = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const result = await createUser(data);
-    if (result.error) {
-      setError(result.error);
-    } else {
-      signIn("credentials", {
-        email: data.email,
-        password: data.password,
-        callbackUrl: "/",
-      });
-    }
+    const result = await fetch(`${process.env.NEXTAUTH_URL}/api/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -67,6 +66,7 @@ const Signup = () => {
                   className="block text-sm font-medium text-gray-700">
                   Name
                 </label>
+                {errors.name && <span>Name field is required</span>}
                 <div className="mt-1">
                   <input
                     {...register("name", { required: true })}
@@ -77,7 +77,6 @@ const Signup = () => {
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
-                {errors.name && <span>Name field is required</span>}
               </div>
 
               <div>
@@ -86,6 +85,7 @@ const Signup = () => {
                   className="block text-sm font-medium text-gray-700">
                   Email address
                 </label>
+                {errors.email && <span>E-mail field is required</span>}
                 <div className="mt-1">
                   <input
                     {...register("email", { required: true })}
@@ -96,7 +96,6 @@ const Signup = () => {
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
-                {errors.email && <span>E-mail field is required</span>}
               </div>
 
               <div>
@@ -105,6 +104,7 @@ const Signup = () => {
                   className="block text-sm font-medium text-gray-700">
                   Password
                 </label>
+                {errors.password && <span>Password field is required</span>}
                 <div className="mt-1">
                   <input
                     {...register("password", { required: true })}
@@ -115,7 +115,6 @@ const Signup = () => {
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
-                {errors.password && <span>Password field is required</span>}
               </div>
 
               <div className="flex items-center justify-between">

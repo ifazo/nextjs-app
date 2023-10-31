@@ -3,8 +3,30 @@ import Link from "next/link";
 import React from "react";
 import logo from "../../public/logo.png";
 import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
 
-const signin = () => {
+const Signin = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    await signIn("credentials", {
+      email: data?.email,
+      password: data?.password,
+      callbackUrl: "/",
+    })
+      .then(() => {
+        toast.success("Login successfully");
+      })
+      .catch(() => {
+        toast.error("Login failed");
+      });
+  };
+
   return (
     <div className="h-full bg-gray-50">
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -41,17 +63,18 @@ const signin = () => {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700">
                   Email address
                 </label>
+                {errors.email && <span>E-mail field is required</span>}
                 <div className="mt-1">
                   <input
                     id="email"
-                    name="email"
+                    {...register("email", { required: true })}
                     type="email"
                     autoComplete="email"
                     required
@@ -66,6 +89,7 @@ const signin = () => {
                   className="block text-sm font-medium text-gray-700">
                   Password
                 </label>
+                {errors.password && <span>Password field is required</span>}
                 <div className="mt-1">
                   <input
                     id="password"
@@ -197,4 +221,4 @@ const signin = () => {
   );
 };
 
-export default signin;
+export default Signin;

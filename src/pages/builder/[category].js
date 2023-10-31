@@ -2,13 +2,6 @@ import React from "react";
 import BuilderProducts from "@/components/BuilderProducts";
 
 export async function getServerSideProps({ params: { category } }) {
-  if (typeof window !== "undefined") {
-    return {
-      props: {
-        data: [],
-      },
-    };
-  }
   const res = await fetch(
     `${process.env.NEXTAUTH_URL}/api/categories/${category}`
   );
@@ -20,7 +13,7 @@ export async function getServerSideProps({ params: { category } }) {
   };
 }
 
-export default function builderCategory({ data }) {
+export default function BuilderCategory({ data }) {
   return (
     <>
       <BuilderProducts data={data} />

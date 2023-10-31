@@ -22,7 +22,7 @@ function classNames(...classes) {
 }
 
 export default function ProductDetails({ data: product }) {
-  
+  // console.log(product)
   return (
     <div className="bg-white">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -33,8 +33,7 @@ export default function ProductDetails({ data: product }) {
             <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
               <Tab.Panel key={product.image}>
                 <Image
-                  height={1000}
-                  width={1000}
+                  layout="fill"
                   src={product.image}
                   alt="Cover"
                   className="w-full h-full object-center object-cover sm:rounded-lg"

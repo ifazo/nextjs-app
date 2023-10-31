@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 
 export default function BuilderProducts({ data: products }) {
+  console.log(products)
   const router = useRouter();
   const dispatch = useDispatch();
 
