@@ -5,18 +5,6 @@ import { signIn } from "next-auth/react";
 import logo from "../../public/logo.png";
 import { useForm } from "react-hook-form";
 
-// const createUser = async (data) => {
-//   const res = await fetch("http://localhost:5000/api/users", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(data),
-//   });
-//   const result = await res.json();
-//   return result;
-// };
-
 const Signup = () => {
   const {
     register,
@@ -32,7 +20,7 @@ const Signup = () => {
       signIn("credentials", {
         email: data.email,
         password: data.password,
-        callbackUrl: "http://localhost:3000/",
+        callbackUrl: "/",
       });
     }
   };
@@ -175,7 +163,7 @@ const Signup = () => {
                   <button
                     onClick={() =>
                       signIn("facebook", {
-                        callbackUrl: "http://localhost:3000/",
+                        callbackUrl: "/",
                       })
                     }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
@@ -198,7 +186,7 @@ const Signup = () => {
                   <button
                     onClick={() =>
                       signIn("google", {
-                        callbackUrl: "http://localhost:3000/",
+                        callbackUrl: "/",
                       })
                     }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
@@ -217,7 +205,7 @@ const Signup = () => {
                   <button
                     onClick={() =>
                       signIn("github", {
-                        callbackUrl: "http://localhost:3000/",
+                        callbackUrl: "/",
                       })
                     }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">

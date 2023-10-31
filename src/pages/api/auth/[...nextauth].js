@@ -14,7 +14,6 @@ export const authOptions = {
       },
       async authorize(credentials, req) {
         const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
-
         if (user) {
           return user;
         } else {

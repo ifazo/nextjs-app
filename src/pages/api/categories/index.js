@@ -1,9 +1,10 @@
-import { database } from "..";
+import database from "@/db";
+import Category from "@/models/categoryModel";
 
-export default async function categoryHandler(req, res) {
-  const categoriesCollection = database.collection("categories");
+export default async function handler(req, res) {
+  await database();
   if (req.method === "GET") {
-    const categories = await categoriesCollection.find().toArray();
-    res.send({ categories });
+    const result = await Category.find();
+    res.status(200).json(result);
   }
 }

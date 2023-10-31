@@ -128,7 +128,7 @@ const signin = () => {
                   <button
                     onClick={() =>
                       signIn("facebook", {
-                        callbackUrl: "http://localhost:3000",
+                        callbackUrl: "/",
                       })
                     }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
@@ -151,7 +151,7 @@ const signin = () => {
                   <button
                     onClick={() =>
                       signIn("google", {
-                        callbackUrl: "http://localhost:3000",
+                        callbackUrl: "/",
                       })
                     }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
@@ -170,7 +170,7 @@ const signin = () => {
                   <button
                     onClick={() =>
                       signIn("github", {
-                        callbackUrl: "http://localhost:3000",
+                        callbackUrl: "/",
                       })
                     }
                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">

@@ -1,25 +1,22 @@
-import { ObjectId } from "mongodb";
-import { database } from "..";
+import database from "@/db";
+import Product from "@/models/productModel";
 
-export default async function productHandler(req, res) {
-  const { pid } = req.query;
+export default async function handler(req, res) {
+  await database();
+  const id = req.query.pid;
   const data = req.body;
-  const productsCollection = database.collection("products");
   if (req.method === "GET") {
-    const product = await productsCollection.findOne({
-      _id: new ObjectId(pid),
-    });
-    res.send({ product });
+    const result = await Product.findById(id);
+    res.status(200).json(result);
   } else if (req.method === "DELETE") {
-    const result = await productsCollection.deleteOne({
-      _id: new ObjectId(pid),
-    });
-    res.send(result);
+    const result = await Product.findByIdAndDelete(id);
+    res.status(200).json(result);
   } else if (req.method === "PATCH") {
-    const result = await productsCollection.updateOne(
-      { _id: new ObjectId(pid) },
-      { $set: data }
-    );
-    res.send(result);
+    const result = await Product.findByIdAndUpdate(id, data, {
+      new: true,
+    });
+    res.status(200).json(result);
+  } else {
+    res.status(400).send("Unknown request");
   }
 }

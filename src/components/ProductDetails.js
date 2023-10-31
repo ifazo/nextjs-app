@@ -21,19 +21,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductDetails({ data }) {
+export default function ProductDetails({ data: product }) {
   
-  const {
-    _id,
-    name,
-    price,
-    category,
-    image,
-    status,
-    rating,
-    description,
-    features,
-  } = data.product;
   return (
     <div className="bg-white">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -42,11 +31,11 @@ export default function ProductDetails({ data }) {
           <Tab.Group as="div" className="flex flex-col-reverse">
             {/* Image selector */}
             <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
-              <Tab.Panel key={image}>
+              <Tab.Panel key={product.image}>
                 <Image
                   height={1000}
                   width={1000}
-                  src={image}
+                  src={product.image}
                   alt="Cover"
                   className="w-full h-full object-center object-cover sm:rounded-lg"
                 />
@@ -57,12 +46,12 @@ export default function ProductDetails({ data }) {
           {/* Product info */}
           <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              {name}
+              {product.name}
             </h1>
 
             <div className="mt-3">
               <h2 className="sr-only">Product information</h2>
-              <p className="text-3xl text-gray-900">${price}</p>
+              <p className="text-3xl text-gray-900">${product.price}</p>
             </div>
 
             {/* Reviews */}
@@ -74,21 +63,23 @@ export default function ProductDetails({ data }) {
                     <StarIcon
                       key={rating}
                       className={classNames(
-                        data?.product.rating > rating ? "text-indigo-500" : "text-gray-300",
+                        product.rating > rating
+                          ? "text-indigo-500"
+                          : "text-gray-300",
                         "h-5 w-5 flex-shrink-0"
                       )}
                       aria-hidden="true"
                     />
                   ))}
                 </div>
-                <p className="sr-only">{rating} out of 5 stars</p>
+                <p className="sr-only">{product.rating} out of 5 stars</p>
               </div>
             </div>
 
             <div className="mt-6">
               <h3 className="sr-only">Description</h3>
               <div className="text-base text-gray-700 space-y-6">
-                <p>{description}</p>
+                <p>{product.description}</p>
               </div>
             </div>
 
@@ -150,7 +141,7 @@ export default function ProductDetails({ data }) {
                         as="div"
                         className="pb-6 prose prose-sm">
                         <ul role="list">
-                          {features.map((feature) => (
+                          {product.features.map((feature) => (
                             <li key={feature}>{feature}</li>
                           ))}
                         </ul>

@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
-export default function BuilderList({ data }) {
-  const categories = data.categories;
+export default function BuilderList({ data: categories }) {
+  
   const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
@@ -55,7 +55,7 @@ export default function BuilderList({ data }) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {categories.map((category) => {
+                    {categories?.map((category) => {
                       const product = products.find(
                         (product) => product.category === category.name
                       );
@@ -110,7 +110,7 @@ export default function BuilderList({ data }) {
                                 </button>
                               ) : (
                                 <Link
-                                  href={`/builder/${category._id}`}
+                                  href={`/builder/${category.name}`}
                                   className="text-indigo-600 hover:text-indigo-900">
                                   Select
                                 </Link>

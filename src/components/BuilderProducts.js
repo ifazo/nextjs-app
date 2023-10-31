@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 
 
-export default function BuilderProducts({ data }) {
+export default function BuilderProducts({ data: products }) {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -53,7 +53,7 @@ export default function BuilderProducts({ data }) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {data?.products.map((product) => (
+                    {products?.map((product) => (
                       <tr key={product._id}>
                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                           <div className="flex items-center">

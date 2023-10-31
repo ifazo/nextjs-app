@@ -1,37 +1,9 @@
 import { clearProducts } from "@/store/features/productSlice";
 import Image from "next/image";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
-
-const categories = [
-    {
-        _id: 1,
-        name: "CPU",
-    },
-    {
-        _id: 2,
-        name: "Motherboard",
-    },
-    {
-        _id: 3,
-        name: "RAM",
-    },
-    {
-        _id: 4,
-        name: "Power Supply Unit",
-    },
-    {
-        _id: 5,
-        name: "Storage Device",
-    },
-    {
-        _id: 6,
-        name: "Monitor",
-    },
-];
+import { useDispatch } from "react-redux";
 
 export default function BuilderList() {
-    const { products } = useSelector((state) => state.products);
     const dispatch = useDispatch();
     const handleClearProducts = () => {
         dispatch(clearProducts());

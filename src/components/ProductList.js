@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ProductList({ data }) {
+export default function ProductList({ data: products }) {
   
-  // const totalCount = data.products.length;
+  // const totalCount = data?.products.length;
   // const randomIndices = [];
   // while (randomIndices.length < 6) {
   //   const randomIndex = Math.floor(Math.random() * totalCount);
@@ -11,7 +11,7 @@ export default function ProductList({ data }) {
   //     randomIndices.push(randomIndex);
   //   }
   // }
-  // const products = randomIndices.map((index) => data.products[index]);
+  // const products = randomIndices.map((index) => data?.products[index]);
 
   return (
     <div className="bg-white">
@@ -32,7 +32,7 @@ export default function ProductList({ data }) {
             <ul
               role="list"
               className="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:space-x-0 lg:grid lg:grid-cols-4 lg:gap-x-8">
-              {data.products.map((product) => (
+              {products?.map((product) => (
                 <li
                   key={product._id}
                   className="w-64 inline-flex flex-col text-center lg:w-auto">
