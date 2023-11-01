@@ -15,12 +15,12 @@ export default function App({
   return (
     <main className={inter.className}>
       <SessionProvider session={session}>
-        <RootLayout>
-          <Provider store={store}>
+        <Provider store={store}>
+          <RootLayout>
             <Component {...pageProps} />
             <Toaster />
-          </Provider>
-        </RootLayout>
+          </RootLayout>
+        </Provider>
       </SessionProvider>
     </main>
   );
