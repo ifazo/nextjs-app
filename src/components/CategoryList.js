@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CategoryList({ data: categories }) {
-  console.log(categories)
+export default function CategoryList({ data }) {
+  const categories = data?.data;
   return (
     <div className="bg-white">
       <div className="py-16 sm:py-24 xl:max-w-7xl xl:mx-auto xl:px-8">

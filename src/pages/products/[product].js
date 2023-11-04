@@ -2,9 +2,7 @@ import ProductDetails from "@/components/ProductDetails";
 import React from "react";
 
 export async function getServerSideProps({ params: { product } }) {
-  const res = await fetch(
-    `${process.env.NEXTAUTH_URL}/api/products/${product}`
-  );
+  const res = await fetch(`${process.env.BACKEND_URL}/api/products/${product}`);
   const data = await res.json();
   return {
     props: {

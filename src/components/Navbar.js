@@ -12,14 +12,16 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const { data: session } = useSession();
+  console.log(session)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch(`/api/categories`)
+    fetch(`${process.env.BACKEND_URL}/api/categories`)
       .then((res) => res.json())
       .then((data) => {
-        setData(data);
+        console.log(data)
+        setData(data?.data);
       });
   }, []);
 
@@ -150,7 +152,7 @@ export default function Navbar() {
             </button>
           ) : (
             <Link
-              href="/signin"
+              href="/auth/signin"
               className="text-sm font-semibold leading-6 text-gray-900">
               Sign in <span aria-hidden="true">&rarr;</span>
             </Link>
@@ -266,7 +268,7 @@ export default function Navbar() {
                   </button>
                 ) : (
                   <Link
-                    href="/signin"
+                    href="/auth/signin"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                     Sign in
                   </Link>

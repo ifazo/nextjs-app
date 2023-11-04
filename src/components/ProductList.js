@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ProductList({ data: products }) {
-  console.log(products)
+export default function ProductList({ data }) {
+  const products = data?.data;
   // const totalCount = data?.products.length;
   // const randomIndices = [];
   // while (randomIndices.length < 6) {

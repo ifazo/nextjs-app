@@ -1,17 +1,21 @@
-import { removeProduct } from "@/store/features/productSlice";
+import { clearProducts, removeProduct } from "@/store/features/productSlice";
 import logo from "../../public/favicon.ico";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
-export default function BuilderList({ data: categories }) {
-  console.log(categories)
+export default function BuilderList({ data }) {
+  const categories = data?.data;
   const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
   const handleRemoveProduct = (product) => {
     dispatch(removeProduct(product));
+  };
+
+  const handleComplete = () => {
+    dispatch(clearProducts());
   };
 
   return (
@@ -137,15 +141,17 @@ export default function BuilderList({ data: categories }) {
             {products.length >= 6 ? (
               <button
                 type="button"
-                onClick={() => toast.success("Build complete!")}
+                onClick={() => {
+                  toast.success("Build complete!")
+                  handleComplete();
+                }}
                 className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
                 Complete
               </button>
             ) : (
               <button
-                  type="button"
-                  disabled
-                onClick={() => console.log("no")}
+                type="button"
+                disabled
                 className="cursor-not-allowed inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
                 Complete
               </button>

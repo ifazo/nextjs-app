@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 
 export function middleware(request) {
-  return NextResponse.redirect(new URL("/signin", request.url));
+  if (request.path === "/builder") {
+    return NextResponse.redirect(new URL("/auth/signin", request.url));
+  }
+  return NextResponse.next();
 }
 
 export const config = {

@@ -21,8 +21,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductDetails({ data: product }) {
-  // console.log(product)
+export default function ProductDetails({ data }) {
+  const product = data?.data;
   return (
     <div className="bg-white">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">

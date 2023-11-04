@@ -27,7 +27,7 @@ export default function Hero() {
                 PC Builder
               </Link>
               <Link
-                href="/signin"
+                href="/auth/signin"
                 className="text-sm font-semibold leading-6 text-gray-900">
                 Sign in <span aria-hidden="true">→</span>
               </Link>

@@ -2,9 +2,8 @@ import BuilderList from "@/components/BuilderList";
 import React from "react";
 
 export async function getStaticProps() {
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/categories`);
+  const res = await fetch(`${ process.env.BACKEND_URL }/api/categories`);
   const data = await res.json();
-  console.log(data);
   return {
     props: {
       data,

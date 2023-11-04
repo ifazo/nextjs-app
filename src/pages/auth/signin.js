@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import logo from "../../public/logo.png";
+import logo from "../../../public/logo.png";
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
@@ -54,7 +54,7 @@ const Signin = () => {
 
           <p className="mt-2 text-center text-sm text-gray-600">
             <Link
-              href="/signup"
+              href="/auth/signup"
               className="font-medium text-indigo-600 hover:text-indigo-500">
               Do not have an account? Sign up
             </Link>

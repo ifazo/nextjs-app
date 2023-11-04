@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 
 
-export default function BuilderProducts({ data: products }) {
-  console.log(products)
+export default function BuilderProducts({ data }) {
+  const products = data?.data;
   const router = useRouter();
   const dispatch = useDispatch();
 

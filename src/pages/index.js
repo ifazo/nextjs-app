@@ -4,11 +4,10 @@ import ProductList from "@/components/ProductList";
 import RootLayout from "@/layouts/RootLayout";
 
 export async function getStaticProps() {
-  const res1 = await fetch(`${process.env.NEXTAUTH_URL}/api/products`);
+  const res1 = await fetch(`${process.env.BACKEND_URL}/api/products`);
   const data1 = await res1.json();
-  const res2 = await fetch(`${process.env.NEXTAUTH_URL}/api/categories`);
+  const res2 = await fetch(`${process.env.BACKEND_URL}/api/categories`);
   const data2 = await res2.json();
-  console.log(data1, data2);
   return {
     props: {
       data1,

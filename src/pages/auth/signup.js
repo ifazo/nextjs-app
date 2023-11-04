@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { signIn } from "next-auth/react";
-import logo from "../../public/logo.png";
+import logo from "../../../public/logo.png";
 import { useForm } from "react-hook-form";
 
 const Signup = () => {

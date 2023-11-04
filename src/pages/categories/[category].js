@@ -2,7 +2,7 @@ import AllProducts from "@/components/AllProducts";
 
 export async function getServerSideProps({ params: { category } }) {
   const res = await fetch(
-    `${process.env.NEXTAUTH_URL}/api/categories/${category}`
+    `${process.env.BACKEND_URL}/api/categories/${category}`
   );
   const data = await res.json();
   return {
