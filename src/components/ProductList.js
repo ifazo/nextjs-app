@@ -3,16 +3,6 @@ import Link from "next/link";
 
 export default function ProductList({ data }) {
   const products = data?.data;
-  // const totalCount = data?.products.length;
-  // const randomIndices = [];
-  // while (randomIndices.length < 6) {
-  //   const randomIndex = Math.floor(Math.random() * totalCount);
-  //   if (!randomIndices.includes(randomIndex)) {
-  //     randomIndices.push(randomIndex);
-  //   }
-  // }
-  // const products = randomIndices.map((index) => data?.products[index]);
-
   return (
     <div className="bg-white">
       <div className="py-16 sm:py-24 lg:max-w-7xl lg:mx-auto lg:px-8">

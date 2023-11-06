@@ -12,15 +12,14 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const { data: session } = useSession();
-  console.log(session)
+  // console.log(session)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.BACKEND_URL}/api/categories`)
+    fetch(`https://mongoose-mongo.vercel.app/api/categories`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         setData(data?.data);
       });
   }, []);
@@ -118,7 +117,7 @@ export default function Navbar() {
                       </div>
                       <div className="flex-auto">
                         <Link
-                          href={`/categories/${category.name}`}
+                          href={`/categories?category=${category.name}`}
                           className="block font-semibold text-gray-900">
                           {category.name}
                           <span className="absolute inset-0" />
@@ -238,7 +237,7 @@ export default function Navbar() {
                           <Disclosure.Button
                             key={category._id}
                             as="a"
-                            href={`/categories/${category._id}`}
+                            href={`/categories?category=${category.name}`}
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                             {category.name}
                           </Disclosure.Button>
