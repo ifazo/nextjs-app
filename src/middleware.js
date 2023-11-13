@@ -1,12 +1,3 @@
-import { NextResponse } from "next/server";
+export { default } from "next-auth/middleware";
 
-export function middleware(request) {
-  if (request.path === "/builder") {
-    return NextResponse.redirect(new URL("/auth/signin", request.url));
-  }
-  return NextResponse.next();
-}
-
-export const config = {
-  matcher: "/builder",
-};
+export const config = { matcher: ["/builder"] };

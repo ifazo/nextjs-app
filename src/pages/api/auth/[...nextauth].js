@@ -37,35 +37,8 @@ export const authOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  session: {
-    strategy: "database",
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-    updateAge: 24 * 60 * 60, // 24 hours
-    generateSessionToken: () => {
-      return randomUUID?.() ?? randomBytes(32).toString("hex");
-    },
-  },
-  jwt: {
-    maxAge: 60 * 60 * 24 * 30, // 30 days
-    async encode() {},
-    async decode() {},
-  },
   pages: {
     signIn: "/auth/signin",
-  },
-  callbacks: {
-    async signIn() {
-      return true;
-    },
-    async redirect({ baseUrl }) {
-      return baseUrl;
-    },
-    async session({ session }) {
-      return session;
-    },
-    async jwt({ token }) {
-      return token;
-    },
   },
 };
 

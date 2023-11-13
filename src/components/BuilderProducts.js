@@ -1,8 +1,7 @@
-import { addProduct } from "@/store/features/productSlice";
+import { addProduct } from "@/store/features/product/Product";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-
 
 export default function BuilderProducts({ data }) {
   const products = data?.data;
@@ -97,7 +96,7 @@ export default function BuilderProducts({ data }) {
                           <button
                             type="button"
                             onClick={() => {
-                                handleAddProduct(product),
+                              handleAddProduct(product),
                                 router.push("/builder");
                             }}
                             className="text-indigo-600 hover:text-indigo-900">

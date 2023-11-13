@@ -24,7 +24,7 @@ export default function CategoryList({ data }) {
                 {categories?.map((category) => (
                   <Link
                     key={category._id}
-                    href={`/categories/${category._id}`}
+                    href={`/categories?category=${category.name}`}
                     className="relative w-56 h-80 rounded-lg p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto">
                     <span aria-hidden="true" className="absolute inset-0">
                       <Image

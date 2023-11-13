@@ -1,9 +1,9 @@
-import { clearProducts, removeProduct } from "@/store/features/productSlice";
 import logo from "../../public/favicon.ico";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import { clearProducts, removeProduct } from "@/store/features/product/Product";
 
 export default function BuilderList({ data }) {
   const categories = data?.data;
@@ -142,7 +142,7 @@ export default function BuilderList({ data }) {
               <button
                 type="button"
                 onClick={() => {
-                  toast.success("Build complete!")
+                  toast.success("Build complete!");
                   handleComplete();
                 }}
                 className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">

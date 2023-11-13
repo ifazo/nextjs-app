@@ -6,7 +6,6 @@ import RootLayout from "@/layouts/RootLayout";
 export async function getStaticProps() {
   const res1 = await fetch(`${process.env.BACKEND_URL}/api/products/random`);
   const data1 = await res1.json();
-  console.log(data1)
   const res2 = await fetch(`${process.env.BACKEND_URL}/api/categories`);
   const data2 = await res2.json();
   return {
