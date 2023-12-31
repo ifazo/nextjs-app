@@ -10,11 +10,11 @@ export const authOptions = {
       name: "Credentials",
       type: "credentials",
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "Your Name" },
+        email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/auth`, {
+        const res = await fetch(`${process.env.BACKEND_URL}/api/auth/signin`, {
           method: "POST",
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" },
