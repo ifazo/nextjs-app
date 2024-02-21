@@ -3,7 +3,7 @@ import Product from "@/models/productModel";
 
 export default async function handler(req, res) {
   await database();
-  const id = req.query.pid;
+  const { id } = req.query;
   const data = req.body;
   if (req.method === "GET") {
     const result = await Product.findById(id);

@@ -6,23 +6,35 @@ import {
   PlusSmIcon,
   StarIcon,
 } from "@heroicons/react/solid";
+import { useDispatch } from "react-redux";
+import { addProduct } from "@/store/features/product/productSlice";
+import toast from "react-hot-toast";
 
-const items = [
-  "Multiple strap configurations",
-  "Spacious interior with top zip",
-  "Leather handle and tabs",
-  "Interior dividers",
-  "Stainless strap loops",
-  "Double stitched construction",
-  "Water-resistant",
-];
+
+export async function getServerSideProps({ params: { id } }) {
+  const res = await fetch(`${process.env.BACKEND_URL}/api/products/${id}`);
+  const data = await res.json();
+  return {
+    props: {
+      data,
+    },
+  };
+}
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductDetails({ data }) {
+export default function Product({ data }) {
+
   const product = data?.data;
+  const dispatch = useDispatch();
+
+  const handleAddProduct = (product) => {
+    dispatch(addProduct(product));
+    toast.success("Product added to the builder");
+  };
+
   return (
     <div className="bg-white">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -33,7 +45,8 @@ export default function ProductDetails({ data }) {
             <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
               <Tab.Panel key={product.image}>
                 <Image
-                  layout="fill"
+                  height={200}
+                  width={200}
                   src={product.image}
                   alt="Cover"
                   className="w-full h-full object-center object-cover sm:rounded-lg"
@@ -87,8 +100,9 @@ export default function ProductDetails({ data }) {
               <div className="mt-10 flex sm:flex-col1">
                 <button
                   type="submit"
+                  onClick={() => handleAddProduct(product)}
                   className="max-w-xs flex-1 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full">
-                  Add to bag
+                  Add to builder
                 </button>
 
                 <button

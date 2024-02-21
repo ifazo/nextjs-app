@@ -4,7 +4,6 @@ import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../public/logo.png";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -36,7 +35,7 @@ export default function Navbar() {
               height={32}
               width={32}
               className="h-8 w-auto"
-              src={logo}
+              src="next.svg"
               alt="logo"
             />
           </Link>
@@ -172,8 +171,8 @@ export default function Navbar() {
                 className="h-8 w-auto"
                 height={32}
                 width={32}
-                src={logo}
-                alt=""
+                src="next.svg"
+                alt="logo"
               />
             </Link>
             <button
