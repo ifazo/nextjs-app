@@ -1,18 +1,27 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from "next/link";
+import Image from "next/image";
 
 export async function getStaticProps() {
-  const res = await fetch(`${process.env.BACKEND_URL}/api/products`);
-  const data = await res.json();
-  return {
-    props: {
-      data,
-    },
-  };
+  try {
+    const res = await fetch(`https://next-js-ifaz.vercel.app/api/products`);
+    const products = await res.json();
+    return {
+      props: {
+        products,
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        products: [],
+      },
+    };
+  }
 }
 
-export default function Products({ data }) {
-  const products = data?.data;
+export default function Products({ products }) {
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -53,5 +62,5 @@ export default function Products({ data }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

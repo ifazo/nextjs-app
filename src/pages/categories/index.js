@@ -2,21 +2,26 @@ import Image from "next/image";
 import Link from "next/link";
 
 export async function getServerSideProps({ query }) {
-  const { category } = query;
-  const res = await fetch(
-    `${process.env.BACKEND_URL}/api/products?category=${category}`
-  );
-  const data = await res.json();
-  return {
-    props: {
-      data,
-    },
-  };
+  try {
+    const { category } = query;
+    const res = await fetch(`https://next-js-ifaz.vercel.app/api/categories/${category}`);
+    const products = await res.json();
+    return {
+      props: {
+        products,
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        products: [],
+      },
+    };
+  }
 }
 
-export default function Category({ data }) {
-  // console.log(data)
-  const products = data?.data;
+export default function Category({ products }) {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -58,4 +63,4 @@ export default function Category({ data }) {
       </div>
     </div>
   );
-};
+}

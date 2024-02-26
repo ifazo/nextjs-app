@@ -4,19 +4,28 @@ import { useDispatch } from "react-redux";
 import { addProduct } from "@/store/features/product/productSlice";
 
 export async function getServerSideProps({ params: { category } }) {
-  const res = await fetch(
-    `${process.env.BACKEND_URL}/api/products?category=${category}`
-  );
-  const data = await res.json();
-  return {
-    props: {
-      data,
-    },
-  };
+  try {
+    const res = await fetch(
+      `https://next-js-ifaz.vercel.app/api/categories/${category}`,
+    );
+    const products = await res.json();
+    return {
+      props: {
+        products,
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        products: [],
+      },
+    };
+  }
 }
 
-export default function BuilderCategory({ data }) {
-  const products = data?.data;
+export default function BuilderCategory({ products }) {
+
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -31,7 +40,7 @@ export default function BuilderCategory({ data }) {
           Builder products by Category
         </h2>
         <div className="mt-8 flex flex-col">
-          <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
               <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
                 <table className="min-w-full divide-y divide-gray-300">
@@ -39,27 +48,32 @@ export default function BuilderCategory({ data }) {
                     <tr>
                       <th
                         scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                      >
                         Name
                       </th>
                       <th
                         scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
                         Category
                       </th>
                       <th
                         scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
                         Price
                       </th>
                       <th
                         scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
                         Status
                       </th>
                       <th
                         scope="col"
-                        className="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                        className="relative py-3.5 pl-3 pr-4 sm:pr-6"
+                      >
                         <span className="sr-only">Remove</span>
                       </th>
                     </tr>
@@ -111,7 +125,8 @@ export default function BuilderCategory({ data }) {
                               handleAddProduct(product),
                                 router.push("/builder");
                             }}
-                            className="text-indigo-600 hover:text-indigo-900">
+                            className="text-indigo-600 hover:text-indigo-900"
+                          >
                             Add To Builder
                           </button>
                         </td>
@@ -123,18 +138,19 @@ export default function BuilderCategory({ data }) {
             </div>
           </div>
         </div>
-        <div className="sm:flex sm:items-center mt-5">
+        <div className="mt-5 sm:flex sm:items-center">
           <div className="sm:flex-auto">
             <h1 className="text-xl font-semibold text-gray-900">Products</h1>
             <p className="mt-2 text-sm text-gray-700">
               A list of all the products available to add to your builder.
             </p>
           </div>
-          <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+          <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
             <button
               type="button"
               onClick={() => router.push("/builder")}
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+            >
               Back
             </button>
           </div>

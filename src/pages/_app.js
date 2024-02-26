@@ -16,10 +16,10 @@ export default function App({
     <main className={inter.className}>
       <SessionProvider session={session}>
         <Provider store={store}>
-            <RootLayout>
-              <Component {...pageProps} />
-              <Toaster />
-            </RootLayout>
+          <RootLayout>
+            <Component {...pageProps} />
+            <Toaster />
+          </RootLayout>
         </Provider>
       </SessionProvider>
     </main>

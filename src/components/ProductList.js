@@ -2,38 +2,41 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function ProductList({ data }) {
-  const products = data?.data;
+  const products = data;
   return (
     <div className="bg-white">
-      <div className="py-16 sm:py-24 lg:max-w-7xl lg:mx-auto lg:px-8">
-        <div className="px-4 flex items-center justify-between sm:px-6 lg:px-0">
+      <div className="py-16 sm:py-24 lg:mx-auto lg:max-w-7xl lg:px-8">
+        <div className="flex items-center justify-between px-4 sm:px-6 lg:px-0">
           <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
             Featured products
           </h2>
           <Link
             href="/products"
-            className="hidden sm:block text-sm font-semibold text-indigo-600 hover:text-indigo-500">
+            className="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block"
+          >
             See everything<span aria-hidden="true"> &rarr;</span>
           </Link>
         </div>
 
-        <div className="mt-8 relative">
-          <div className="relative w-full pb-6 -mb-6 overflow-x-auto">
+        <div className="relative mt-8">
+          <div className="relative -mb-6 w-full overflow-x-auto pb-6">
             <ul
               role="list"
-              className="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:space-x-0 lg:grid lg:grid-cols-4 lg:gap-x-8">
+              className="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-x-8 lg:space-x-0"
+            >
               {products?.map((product) => (
                 <li
                   key={product._id}
-                  className="w-64 inline-flex flex-col text-center lg:w-auto">
+                  className="inline-flex w-64 flex-col text-center lg:w-auto"
+                >
                   <div className="group relative">
-                    <div className="w-full bg-gray-200 rounded-md overflow-hidden aspect-w-1 aspect-h-1">
+                    <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200">
                       <Image
                         height={200}
                         width={200}
                         src={product.image}
                         alt="Product"
-                        className="w-full h-full object-center object-cover group-hover:opacity-75"
+                        className="h-full w-full object-cover object-center group-hover:opacity-75"
                       />
                     </div>
                     <div className="mt-6">
@@ -76,7 +79,8 @@ export default function ProductList({ data }) {
         <div className="mt-12 flex px-4 sm:hidden">
           <a
             href="#"
-            className="text-sm font-semibold text-indigo-600 hover:text-indigo-500">
+            className="text-sm font-semibold text-indigo-600 hover:text-indigo-500"
+          >
             See everything<span aria-hidden="true"> &rarr;</span>
           </a>
         </div>

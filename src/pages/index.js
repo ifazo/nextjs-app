@@ -4,16 +4,26 @@ import ProductList from "@/components/ProductList";
 import RootLayout from "@/layouts/RootLayout";
 
 export async function getStaticProps() {
-  const res1 = await fetch(`${process.env.BACKEND_URL}/api/products/random`);
-  const data1 = await res1.json();
-  const res2 = await fetch(`${process.env.BACKEND_URL}/api/categories`);
-  const data2 = await res2.json();
-  return {
-    props: {
-      data1,
-      data2,
-    },
-  };
+  try {
+    const res1 = await fetch(`https://next-js-ifaz.vercel.app/api/random`);
+    const data1 = await res1.json();
+    const res2 = await fetch(`https://next-js-ifaz.vercel.app/api/categories`);
+    const data2 = await res2.json();
+    return {
+      props: {
+        data1,
+        data2,
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        data1: [],
+        data2: [],
+      },
+    };
+  }
 }
 
 export default function Page({ data1, data2 }) {

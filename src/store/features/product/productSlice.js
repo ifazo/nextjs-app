@@ -13,15 +13,16 @@ const productSlice = createSlice({
     },
     removeProduct: (state, action) => {
       state.products = state.products.filter(
-        (product) => product.category !== action.payload.category
+        (product) => product.category !== action.payload.category,
       );
     },
     clearProducts: (state) => {
-      state.products = []
-    }
+      state.products = [];
+    },
   },
 });
 
-export const { addProduct, removeProduct, clearProducts } = productSlice.actions;
+export const { addProduct, removeProduct, clearProducts } =
+  productSlice.actions;
 
 export default productSlice;

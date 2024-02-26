@@ -11,15 +11,15 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const { data: session } = useSession();
-  // console.log(session)
+  console.log(session);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.BACKEND_URL}/api/categories`)
+    fetch(`https://next-js-ifaz.vercel.app/api/categories`)
       .then((res) => res.json())
       .then((data) => {
-        setData(data?.data);
+        setData(data);
       });
   }, []);
 
@@ -27,7 +27,8 @@ export default function Navbar() {
     <header className="bg-white">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
-        aria-label="Global">
+        aria-label="Global"
+      >
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Logo</span>
@@ -44,7 +45,8 @@ export default function Navbar() {
           <button
             type="button"
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-            onClick={() => setMobileMenuOpen(true)}>
+            onClick={() => setMobileMenuOpen(true)}
+          >
             <span className="sr-only">Open main menu</span>
             <div className="h-6 w-6" aria-hidden="true">
               <svg
@@ -53,7 +55,8 @@ export default function Navbar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6">
+                className="h-6 w-6"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -66,7 +69,8 @@ export default function Navbar() {
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
           <Link
             href="/"
-            className="text-sm font-semibold leading-6 text-gray-900">
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
             Home
           </Link>
           <Popover className="relative">
@@ -74,14 +78,16 @@ export default function Navbar() {
               Category
               <div
                 className="h-5 w-5 flex-none text-gray-400"
-                aria-hidden="true">
+                aria-hidden="true"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6">
+                  className="h-6 w-6"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -98,13 +104,15 @@ export default function Navbar() {
               enterTo="opacity-100 translate-y-0"
               leave="transition ease-in duration-150"
               leaveFrom="opacity-100 translate-y-0"
-              leaveTo="opacity-0 translate-y-1">
+              leaveTo="opacity-0 translate-y-1"
+            >
               <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                 <div className="p-4">
                   {data?.map((category) => (
                     <div
                       key={category._id}
-                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
+                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+                    >
                       <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                         <Image
                           width={24}
@@ -117,7 +125,8 @@ export default function Navbar() {
                       <div className="flex-auto">
                         <Link
                           href={`/categories?category=${category.name}`}
-                          className="block font-semibold text-gray-900">
+                          className="block font-semibold text-gray-900"
+                        >
                           {category.name}
                           <span className="absolute inset-0" />
                         </Link>
@@ -132,26 +141,30 @@ export default function Navbar() {
 
           <Link
             href="/products"
-            className="text-sm font-semibold leading-6 text-gray-900">
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
             Products
           </Link>
           <Link
             href="/builder"
-            className="text-sm font-semibold leading-6 text-gray-900">
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
             Builder
           </Link>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          {session?.user ? (
+          {session?.user?.email ? (
             <button
               onClick={() => signOut()}
-              className="text-sm font-semibold leading-6 text-gray-900">
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
               Sign out <span aria-hidden="true">&rarr;</span>
             </button>
           ) : (
             <Link
               href="/auth/signin"
-              className="text-sm font-semibold leading-6 text-gray-900">
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
               Sign in <span aria-hidden="true">&rarr;</span>
             </Link>
           )}
@@ -161,7 +174,8 @@ export default function Navbar() {
         as="div"
         className="lg:hidden"
         open={mobileMenuOpen}
-        onClose={setMobileMenuOpen}>
+        onClose={setMobileMenuOpen}
+      >
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
@@ -178,7 +192,8 @@ export default function Navbar() {
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
-              onClick={() => setMobileMenuOpen(false)}>
+              onClick={() => setMobileMenuOpen(false)}
+            >
               <span className="sr-only">Close menu</span>
               <div className="h-6 w-6" aria-hidden="true">
                 <svg
@@ -187,7 +202,8 @@ export default function Navbar() {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6">
+                  className="h-6 w-6"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -202,7 +218,8 @@ export default function Navbar() {
               <div className="space-y-2 py-6">
                 <Link
                   href="/"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
                   Home
                 </Link>
                 <Disclosure as="div" className="-mx-3">
@@ -213,16 +230,18 @@ export default function Navbar() {
                         <div
                           className={classNames(
                             open ? "rotate-180" : "",
-                            "h-5 w-5 flex-none"
+                            "h-5 w-5 flex-none",
                           )}
-                          aria-hidden="true">
+                          aria-hidden="true"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
                             stroke="currentColor"
-                            className="w-6 h-6">
+                            className="h-6 w-6"
+                          >
                             <path
                               strokeLinecap="round"
                               strokeLinejoin="round"
@@ -237,7 +256,8 @@ export default function Navbar() {
                             key={category._id}
                             as="a"
                             href={`/categories?category=${category.name}`}
-                            className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                            className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                          >
                             {category.name}
                           </Disclosure.Button>
                         ))}
@@ -248,12 +268,14 @@ export default function Navbar() {
 
                 <Link
                   href="/products"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
                   Products
                 </Link>
                 <Link
                   href="/builder"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
                   Builder
                 </Link>
               </div>
@@ -261,13 +283,15 @@ export default function Navbar() {
                 {session?.user?.email ? (
                   <button
                     onClick={() => signOut()}
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
                     Sign out
                   </button>
                 ) : (
                   <Link
                     href="/auth/signin"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
                     Sign in
                   </Link>
                 )}
