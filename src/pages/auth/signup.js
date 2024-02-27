@@ -34,13 +34,13 @@ export default function Signup() {
 
   const handleGoogleSignIn = () => {
     signIn("google", {
-      callbackUrl: "/",
+      redirect: false,
     });
   };
 
   const handleGithubSignIn = () => {
     signIn("github", {
-      callbackUrl: "/",
+      redirect: false,
     });
   };
 

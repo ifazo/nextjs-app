@@ -30,13 +30,13 @@ export default function Signin() {
 
   const handleGoogleSignIn = () => {
     signIn("google", {
-      callbackUrl: "/",
+      redirect: false,
     });
   };
 
   const handleGithubSignIn = () => {
     signIn("github", {
-      callbackUrl: "/",
+      redirect: false,
     });
   };
 
