@@ -1,17 +1,19 @@
-import Image from "next/image";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
 
 export default function Signup() {
+
   const formik = useFormik({
     initialValues: {
       name: "",
       email: "",
       password: "",
     },
+
     onSubmit: async (values) => {
+      console.log(values)
       await fetch(`https://next-js-ifaz.vercel.app/api/users`, {
         method: "POST",
         body: JSON.stringify(values),
@@ -19,12 +21,13 @@ export default function Signup() {
       })
         .then((res) => {
           if (res.ok) {
-            toast.success("User created successfully");
+            toast.success("Signed up successfully");
+          } else {
+            toast.error("Sign up failed");
           }
-          toast.error("User creation failed");
         })
         .catch((err) => {
-          if (err) toast.error("Internal server error");
+          toast.error(err.message);
         });
     },
   });
@@ -45,13 +48,6 @@ export default function Signup() {
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <Image
-            height={40}
-            width={40}
-            className="mx-auto h-10 w-auto"
-            src="next.svg"
-            alt="logo"
-          />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign up to your account
           </h2>

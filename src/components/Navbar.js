@@ -11,16 +11,18 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const { data: session } = useSession();
-  console.log(session);
+  // console.log(session);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch(`https://next-js-ifaz.vercel.app/api/categories`)
+    fetch(`/api/categories`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
-      });
+      }).catch((err) => {
+        console.log(err.message);
+      })
   }, []);
 
   return (

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useFormik } from "formik";
@@ -11,18 +10,20 @@ export default function Signin() {
       password: "",
     },
     onSubmit: async (values) => {
+      console.log(values)
       await signIn("credentials", {
-        email: values.email,
-        password: values.password,
-        callbackUrl: "/",
-      })
+        email: values?.email,
+        password: values?.password,
+        redirect: false,
+        })
         .then((res) => {
           console.log(res);
-          if (res) toast.success("Signed in successfully");
+          if (res.ok) toast.success("Signed in successfully");
           else toast.error("Sign in failed");
         })
         .catch((err) => {
-          if (err) toast.error("Internal server error");
+          console.log(err);
+          if (err) toast.error(err);
         });
     },
   });
@@ -43,13 +44,6 @@ export default function Signin() {
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <Image
-            height={40}
-            width={40}
-            className="mx-auto h-10 w-auto"
-            src="next.svg"
-            alt="logo"
-          />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account
           </h2>

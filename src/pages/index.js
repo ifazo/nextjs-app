@@ -5,33 +5,33 @@ import RootLayout from "@/layouts/RootLayout";
 
 export async function getStaticProps() {
   try {
-    const res1 = await fetch(`https://next-js-ifaz.vercel.app/api/random`);
-    const data1 = await res1.json();
-    const res2 = await fetch(`https://next-js-ifaz.vercel.app/api/categories`);
-    const data2 = await res2.json();
+    const productRes = await fetch(`https://next-js-ifaz.vercel.app/api/random`);
+    const products = await productRes.json()
+    const categoryRes = await fetch(`https://next-js-ifaz.vercel.app/api/categories`);
+    const categories = await categoryRes.json();
     return {
       props: {
-        data1,
-        data2,
+        products,
+        categories,
       },
     };
   } catch (error) {
     console.error(error);
     return {
       props: {
-        data1: [],
-        data2: [],
+        products: [],
+        categories: [],
       },
     };
   }
 }
 
-export default function Page({ data1, data2 }) {
+export default function Page({ products, categories  }) {
   return (
     <main>
       <Hero />
-      <ProductList data={data1} />
-      <CategoryList data={data2} />
+      <ProductList products={products} />
+      <CategoryList categories={categories} />
     </main>
   );
 }

@@ -9,15 +9,19 @@ export default async function handler(req, res) {
     const users = await User.find({});
     return res.send(users);
   } else if (req.method === "POST") {
-    const existingUser = User.findOne({ email: data.email });
-    if (existingUser) {
-      res.status(400).send("User already exists");
-      return;
-    } else {
-      const result = await User.create(data);
-      return res.send(result);
+    try {
+      const existingUser = await User.findOne({ email: data.email });
+      if (existingUser) {
+        return res.status(400).send("User already exists");
+      } else {
+        const result = await User.create(data);
+        return res.send(result);
+      }
+    } catch (error) {
+      console.error("Error creating user:", error);
+      return res.status(500).send("Error creating user");
     }
   } else {
-    res.status(400).send("Unknown request");
+    return res.status(400).send("Unknown request");
   }
 }
