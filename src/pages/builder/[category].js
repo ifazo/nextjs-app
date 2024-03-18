@@ -6,7 +6,7 @@ import { addProduct } from "@/store/features/product/productSlice";
 export async function getServerSideProps({ params: { category } }) {
   try {
     const res = await fetch(
-      `https://next-js-ifaz.vercel.app/api/categories/${category}`,
+      `https://ifaz-nextjs.vercel.app/api/categories/${category}`,
     );
     const products = await res.json();
     return {

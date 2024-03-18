@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export async function getStaticProps() {
   try {
-    const res = await fetch(`https://next-js-ifaz.vercel.app/api/products`);
+    const res = await fetch(`https://ifaz-nextjs.vercel.app/api/products`);
     const products = await res.json();
     return {
       props: {

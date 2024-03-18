@@ -13,8 +13,8 @@ export default function Signup() {
     },
 
     onSubmit: async (values) => {
-      console.log(values)
-      await fetch(`https://next-js-ifaz.vercel.app/api/users`, {
+      // console.log(values)
+      await fetch(`https://ifaz-nextjs.vercel.app/api/users`, {
         method: "POST",
         body: JSON.stringify(values),
         headers: { "Content-Type": "application/json" },
@@ -34,13 +34,13 @@ export default function Signup() {
 
   const handleGoogleSignIn = () => {
     signIn("google", {
-      redirect: false,
+      callbackUrl: '/'
     });
   };
 
   const handleGithubSignIn = () => {
     signIn("github", {
-      redirect: false,
+      callbackUrl: '/'
     });
   };
 

@@ -6,11 +6,11 @@ export default function Hero() {
       <div className="mx-auto max-w-2xl py-8 sm:py-12 lg:py-14">
         <div className="hidden sm:mb-8 sm:flex sm:justify-center">
           <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-            Announcing my next project.{" "}
-            <a href="#" className="font-semibold text-indigo-600">
+            Welcome to my PC Builder website.{" "}
+            <Link href="/auth/signup" className="font-semibold text-indigo-600">
               <span className="absolute inset-0" aria-hidden="true" />
-              Read more <span aria-hidden="true">&rarr;</span>
-            </a>
+              Sign Up <span aria-hidden="true">&rarr;</span>
+            </Link>
           </div>
         </div>
         <div className="text-center">
@@ -18,8 +18,7 @@ export default function Hero() {
             Build your PC with favorite components
           </h1>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            This is a Next.js project with Tailwind CSS and Redux Toolkit. It is
-            a simple PC-builder website created by Ziaul Karim Ifaz. Please sign
+            This is a PC Builder website made with Next.js. This PC Builder website was created by Ziaul Karim Ifaz. Please sign
             in before start building your PC...
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">

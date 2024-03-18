@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 
 export async function getServerSideProps({ params: { id } }) {
   try {
-    const res = await fetch(`https://next-js-ifaz.vercel.app/api/products/${id}`);
+    const res = await fetch(`https://ifaz-nextjs.vercel.app/api/products/${id}`);
     const product = await res.json();
     return {
       props: {

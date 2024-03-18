@@ -10,19 +10,19 @@ export default function Signin() {
       password: "",
     },
     onSubmit: async (values) => {
-      console.log(values)
+      // console.log(values)
       await signIn("credentials", {
         email: values?.email,
         password: values?.password,
-        redirect: false,
+        callbackUrl: '/',
         })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.ok) toast.success("Signed in successfully");
           else toast.error("Sign in failed");
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           if (err) toast.error(err);
         });
     },
@@ -30,13 +30,13 @@ export default function Signin() {
 
   const handleGoogleSignIn = () => {
     signIn("google", {
-      redirect: false,
+      callbackUrl: '/'
     });
   };
 
   const handleGithubSignIn = () => {
     signIn("github", {
-      redirect: false,
+      callbackUrl: '/'
     });
   };
 

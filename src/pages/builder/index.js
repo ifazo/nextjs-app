@@ -10,7 +10,7 @@ import logo from "public/favicon.ico";
 
 export async function getStaticProps() {
   try {
-    const res = await fetch(`https://next-js-ifaz.vercel.app/api/categories`);
+    const res = await fetch(`https://ifaz-nextjs.vercel.app/api/categories`);
     const categories = await res.json();
     return {
       props: {

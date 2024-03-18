@@ -5,9 +5,9 @@ import RootLayout from "@/layouts/RootLayout";
 
 export async function getStaticProps() {
   try {
-    const productRes = await fetch(`https://next-js-ifaz.vercel.app/api/random`);
+    const productRes = await fetch(`https://ifaz-nextjs.vercel.app/api/random`);
     const products = await productRes.json()
-    const categoryRes = await fetch(`https://next-js-ifaz.vercel.app/api/categories`);
+    const categoryRes = await fetch(`https://ifaz-nextjs.vercel.app/api/categories`);
     const categories = await categoryRes.json();
     return {
       props: {
@@ -26,7 +26,7 @@ export async function getStaticProps() {
   }
 }
 
-export default function Page({ products, categories  }) {
+export default function Page({ products, categories }) {
   return (
     <main>
       <Hero />

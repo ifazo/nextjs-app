@@ -4,7 +4,7 @@ import Link from "next/link";
 export async function getServerSideProps({ query }) {
   try {
     const { category } = query;
-    const res = await fetch(`https://next-js-ifaz.vercel.app/api/categories/${category}`);
+    const res = await fetch(`https://ifaz-nextjs.vercel.app/api/categories/${category}`);
     const products = await res.json();
     return {
       props: {
