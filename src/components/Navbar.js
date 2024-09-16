@@ -225,6 +225,7 @@ export default function Navbar() {
                 >
                   Home
                 </Link>
+                
                 <Disclosure as="div" className="-mx-3">
                   {({ open }) => (
                     <>
@@ -233,7 +234,7 @@ export default function Navbar() {
                         <div
                           className={classNames(
                             open ? "rotate-180" : "",
-                            "h-5 w-5 flex-none",
+                            "h-5 w-5 flex-none"
                           )}
                           aria-hidden="true"
                         >
@@ -254,7 +255,7 @@ export default function Navbar() {
                         </div>
                       </Disclosure.Button>
                       <Disclosure.Panel className="mt-2 space-y-2">
-                        {data?.categories?.map((category) => (
+                        {data?.map((category) => (
                           <Disclosure.Button
                             key={category._id}
                             as="a"

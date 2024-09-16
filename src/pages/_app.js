@@ -1,19 +1,23 @@
 import "@/styles/globals.css";
 import RootLayout from "@/layouts/RootLayout";
 import { SessionProvider } from "next-auth/react";
-import { Inter } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 import { Provider } from "react-redux";
 import store from "@/store/store";
 import { Toaster } from "react-hot-toast";
 
-const inter = Inter({ subsets: ["latin"] });
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  weight: "500",
+});
+
 
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }) {
   return (
-    <main className={inter.className}>
+    <main className={playfairDisplay.className}>
       <SessionProvider session={session}>
         <Provider store={store}>
           <RootLayout>

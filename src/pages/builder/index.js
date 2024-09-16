@@ -6,7 +6,7 @@ import {
   clearProducts,
   removeProduct,
 } from "@/store/features/product/productSlice";
-import logo from "public/favicon.ico";
+import logo from "public/favicon.png";
 
 export async function getStaticProps() {
   try {
