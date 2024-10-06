@@ -1,9 +1,9 @@
 import { Disclosure, Tab } from "@headlessui/react";
 import Image from "next/image";
 import {
-  HeartIcon,
   MinusSmIcon,
   PlusSmIcon,
+  ShareIcon,
   StarIcon,
 } from "@heroicons/react/solid";
 import { useDispatch } from "react-redux";
@@ -12,7 +12,9 @@ import toast from "react-hot-toast";
 
 export async function getServerSideProps({ params: { id } }) {
   try {
-    const res = await fetch(`https://ifaz-nextjs.vercel.app/api/products/${id}`);
+    const baseUrl = process.env.BASE_URL;
+
+    const res = await fetch(`${baseUrl}/api/products/${id}`);
     const product = await res.json();
     return {
       props: {
@@ -116,7 +118,7 @@ export default function Product({ product }) {
                   type="button"
                   className="ml-4 flex items-center justify-center rounded-md px-3 py-3 text-gray-400 hover:bg-gray-100 hover:text-gray-500"
                 >
-                  <HeartIcon
+                  <ShareIcon
                     className="h-6 w-6 flex-shrink-0"
                     aria-hidden="true"
                   />

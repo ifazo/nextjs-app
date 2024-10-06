@@ -6,11 +6,16 @@ import {
   clearProducts,
   removeProduct,
 } from "@/store/features/product/productSlice";
-import logo from "public/favicon.png";
+import { loadStripe } from '@stripe/stripe-js';
+
+// Initialize Stripe with your public key
+const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 
 export async function getStaticProps() {
   try {
-    const res = await fetch(`https://ifaz-nextjs.vercel.app/api/categories`);
+    const baseUrl = process.env.BASE_URL;
+
+    const res = await fetch(`${baseUrl}/api/categories`);
     const categories = await res.json();
     return {
       props: {
@@ -29,15 +34,34 @@ export async function getStaticProps() {
 
 export default function Builder({ categories }) {
 
-  const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.products);
+
+  const totalAmount = products.reduce((sum, product) => sum + parseFloat(product.price), 0);
 
   const handleRemoveProduct = (product) => {
     dispatch(removeProduct(product));
   };
 
-  const handleComplete = () => {
-    dispatch(clearProducts());
+  const handlePayment = async () => {
+    const stripe = await stripePromise;
+    
+    const response = await fetch('/api/payment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ products }),
+    });
+
+    const session = await response.json();
+    
+    // Redirect to Stripe Checkout
+    const result = await stripe.redirectToCheckout({ sessionId: session.id });
+
+    if (result.error) {
+      console.error(result.error.message);
+    }
   };
 
   return (
@@ -100,7 +124,7 @@ export default function Builder({ categories }) {
                                     width={40}
                                     height={40}
                                     className="h-10 w-10 rounded-sm"
-                                    src={product ? product.image : logo}
+                                    src={product ? product.image : '/logo.png'}
                                     alt=""
                                   />
                                 </div>
@@ -171,12 +195,12 @@ export default function Builder({ categories }) {
               <button
                 type="button"
                 onClick={() => {
-                  toast.success("Build complete!");
-                  handleComplete();
+                  toast.loading("Processing payment...");
+                  handlePayment();
                 }}
                 className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
               >
-                Complete
+                Pay ${totalAmount}
               </button>
             ) : (
               <button
@@ -184,7 +208,7 @@ export default function Builder({ categories }) {
                 disabled
                 className="inline-flex cursor-not-allowed items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
               >
-                Complete
+                Processing...
               </button>
             )}
           </div>

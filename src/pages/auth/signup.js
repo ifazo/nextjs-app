@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 
 export default function Signup() {
 
+  const baseUrl = process.env.BASE_URL;
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -14,7 +16,7 @@ export default function Signup() {
 
     onSubmit: async (values) => {
       // console.log(values)
-      await fetch(`https://ifaz-nextjs.vercel.app/api/users`, {
+      await fetch(`${baseUrl}/api/users`, {
         method: "POST",
         body: JSON.stringify(values),
         headers: { "Content-Type": "application/json" },
